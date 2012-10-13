@@ -1,0 +1,51 @@
+{% extends 'setting/base.html' %}
+
+{% block content %}
+
+			    <div class="setting" >
+                    {% if G.success %}
+                      <p class="tip" >修改成功</p>
+                    {% endif %}
+                    <form action='/setting/account/' method='post' >
+                    <p>
+                        <label for="email" >现在的邮箱</label>
+                        {{ form.email }}
+                        <span class='error'  >
+                           {% for error in form.email.errors %}
+                                {{ error }}
+                            {% endfor %}
+                            {{ errors.incorrectem }}
+                        </span>
+                       
+                       
+                    </p>
+
+                    <p>
+                        <label for="password" >登陆密码</label>
+                        {{ form.password }}
+                        <span class='error'  >
+                           {% for error in form.password.errors %}
+                                {{ error }}
+                            {% endfor %}
+                            {{errors.incorrectpw}}
+                        </span>
+                        
+                    </p>
+
+                    <p>
+                        <label for="newemail" >新邮箱</label>
+                        {{ form.newemail }}
+                        <span class='error'  >
+                           {% for error in form.newemail.errors %}
+                                {{ error }}
+                          {% endfor %}
+                        </span>
+                    </p>
+
+                    <p>
+                        <input type="submit" class="action" value="更新" />
+                    </p>
+                      </form>
+                </div>
+
+{% endblock %}

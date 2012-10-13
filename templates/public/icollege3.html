@@ -1,0 +1,379 @@
+{% load filter_tool %}
+<!DOCTYPE html>
+<html>
+    <head>
+        {% block title %}
+          <title>{{ pagetitle }}</title>
+        {% endblock %}
+        
+        <meta content="IE=edge" http-equiv="X-UA-Compatible">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link href="{{ STATIC_URL }}css/site.css?{% now "U" %}" rel="stylesheet" type="text/css" media="screen" />
+        <link href="{{ STATIC_URL }}css/style.css?{% now "U" %}" rel="stylesheet" type="text/css" media="screen" />
+
+        <link href="{{ STATIC_URL }}css/icollege.css?{% now "U" %}" rel="stylesheet" type="text/css" media="screen" />
+
+        <link href="{{ STATIC_URL }}css/blog.css?{% now "U" %}" rel="stylesheet" type="text/css" media="screen" />
+    <link href="{{ STATIC_URL }}css/ask.css?{% now "U" %}" rel="stylesheet" type="text/css" media="screen" />
+     <link href="{{ STATIC_URL }}css/topic.css?{% now "U" %}" rel="stylesheet" type="text/css" media="screen" />
+       <style type="text/css">
+
+       </style>
+    </head>
+    <body>
+    
+
+        <div id="nav_wrap" >
+            {% include 'home/nav.html' %}
+        </div>
+
+         <div id="main_wrap" >
+            <div id="main">
+              <div class="pic_college_column" >
+                <h3>图片墙</h3>
+                  <div class="column_item" >
+                    <div class="pic" >
+                      <img src="/img/univ/28991922618752718.jpg" width="250" height="300" />
+                    </div>
+
+                    <div class="info" >
+                     <div class="itm time" >
+                      2012-05-12
+                     </div>
+                     <div class="itm hot" >
+                      <a href="javascript:void(0)" >445 <i>♥</i></a>
+                     </div>
+                    </div>
+                  </div>
+
+                   <div class="column_item" >
+                        <div class="pic" >
+                          <img src="/img/univ/1092967334585012667.jpg" width="300" height="250" />
+                        </div>
+
+                        <div class="info" >
+                         <div class="itm time" >
+                          2012-05-12
+                         </div>
+                         <div class="itm hot" >
+                          <a href="javascript:void(0)" >445 <i>♥</i></a>
+                         </div>
+                        </div>
+                  </div>
+
+                  <div class="column_item" >
+                        <div class="pic" >
+                          <img src="/img/univ/2711729925647998688.jpg" width="250" height="300" />
+                        </div>
+                        <div class="info" >
+                         <div class="itm time" >
+                          2012-05-12
+                         </div>
+                         <div class="itm hot" >
+                          <a href="javascript:void(0)" >445 <i>♥</i></a>
+                         </div>
+                        </div>
+                  </div>
+
+
+                  <div class="column_item" >
+                        <div class="pic" >
+                          <img src="/img/univ/1566689720389068805.jpg" width="250" height="250" />
+                        </div>
+                  </div>
+                  <!--end pic column-->
+              </div>
+               <!--end main-->
+
+      <div class="fl" > 
+
+        
+
+
+        <div class="blog" style="font-size:12px" >
+                <div class="list" >
+                  <h3>热门日志</h3>
+                    <ul>
+                        {% for a in articles %}
+                            <li class="item" style="padding-bottom:0px" >
+                              <div class="title" >
+                                <h3><a href="/blog/{{ a.article.id }}?subject={{ one.id }}" >{{ a.article.title }}</a></h3>
+                            </div> 
+                               <div class="au" >
+                                  {% if a.author.url %}
+                                      <a href="/people/{{ a.author.url }}">{{ a.author.nickname }}</a>
+                                    {% else %}
+                                      <a href="/people/{{ a.author.id }}">{{ a.author.nickname }}</a>
+                                    {% endif %}
+                                    <span class='time' >{{ a.article.create_time|date:'Y-m-d H:i' }}</span>
+                                </div>
+                          
+                            {% autoescape off %}
+                            <div class="content" >
+                                {{ a.article.content|cutwords_html:100 }}
+                            </div>
+                            <div style="text-align:right !important" >
+                               <a class="viewall" style="font-size:12px;diplay:inline-block;margin-bottom:5px;" href="/blog/{{ a.article.id }}">查看全文</a>
+                            </div>
+
+                            {% endautoescape%}
+                        </li> 
+                        {% endfor %}
+                    </ul>
+                </div>
+              </div>
+
+
+
+        <div class="ask" style="font-size:12px" >
+          <h3>热门问题</h3>
+          {% for q in questions %}
+               <div class="question" >
+                  <div style="" >
+                    {% if q.q.anonymity %}
+
+                    {% else %}
+
+                        {% if q.u.url %}
+                           <a class="uh"  href="/people/{{ q.u.url }}">
+                          <img title="{{ q.u.nickname }}" src="{{ avatar_url }}{{ q.u.head }}">
+                        </a>
+                        {% else %}
+
+                         <a class="uh"  href="/people/{{ q.u.id }}">
+                          <img title="{{ q.u.nickname }}" src="{{ avatar_url }}{{ q.u.head }}">
+                        </a>
+
+                        {% endif %}
+
+                     {% endif %}
+                   
+                    <h2><a href="/question/{{ q.q.id }}" >{{ q.q.question }}</a><a href=""></a></h2>
+                  </div>
+                  
+                  <div class="q_state" >
+                        <h3>
+                           {% if q.t %}
+                           <span>
+                               标签:
+                               {% for s in q.t %}
+                                  <a href="#" >{{ s.tag }}</a>
+                               {% endfor %}
+                            </span>
+                           {% endif %}
+                            {% if q.s %}
+                           <span>
+                               主题:
+                               {% for s in q.s %}
+                                  <a href="/ask/subject/{{ s.id }}/{{ s.subject }}" >{{ s.subject }}</a>
+                               {% endfor %}
+                            </span>
+                           {% endif %}
+                      </h3>
+                      <span>{{ q.q.answer_count }}个答案</span>
+                      <span style="margin-left: 15px;float:right;padding-top:2px" >{{ q.q.create_time|date:'Y-m-d  H:i' }}</span>
+                  </div>
+              </div>
+          {% endfor %}
+      </div>
+
+
+          <div class="people_sq" >
+            <h3>人物广场</h3>
+            <div  class="item" >
+              <a class="uh" href="">
+                <img src="/img/univ/1566689720389068805.jpg" width="48" height="48" />
+              </a>
+              <a class="u" href="">
+                Jone
+              </a>
+            </div>
+              <div  class="item" >
+              <a class="uh" href="">
+                <img src="/img/univ/1092967334585012667.jpg" width="48" height="48" />
+              </a>
+              <a class="u" href="">
+                Swift
+              </a>
+            </div>
+              <div  class="item" >
+              <a class="uh" href="">
+                <img src="/img/univ/2711729925647998688.jpg" width="48" height="48" />
+              </a>
+              <a class="u" href="">
+                Never
+              </a>
+            </div>
+             <div  class="item" >
+              <a class="uh" href="">
+                <img src="/img/univ/2711729925647998688.jpg" width="48" height="48" />
+              </a>
+              <a class="u" href="">
+                Jane
+              </a>
+            </div>
+             <div  class="item" >
+              <a class="uh" href="">
+                <img src="/img/univ/2711729925647998688.jpg" width="48" height="48" />
+              </a>
+              <a class="u" href="">
+                从笑到笑
+              </a>
+            </div>
+             <div  class="item" >
+              <a class="uh" href="">
+                <img src="/img/univ/2711729925647998688.jpg" width="48" height="48" />
+              </a>
+              <a class="u" href="">
+                Lucy
+              </a>
+            </div>
+        </div>
+
+      </div>
+            <div class="fr">
+            
+          
+            <div class="newest" >
+
+          <h3>最新动态</h3>
+          <div class="item" >
+            <dl>
+              <dt > 
+                <a class="uh" href="javascript:;">
+                  <img src="/img/avatar/e65ed8826_s.jpg">
+                </a>
+              </dt>
+              <dd>
+                <p><a class="u" href="">Swift </a>喜欢照片 <a class="d" href="">Shritg</a></p>
+              </dd>
+            </dl>
+          </div>
+
+             <div class="item" >
+            <dl>
+              <dt > 
+                <a class="uh" href="javascript:;">
+              <img src="/img/avatar/Xvd2012519124110WTpthumb.jpg">
+            </a>
+              </dt>
+              <dd>
+              <p><a class="u" href="">三月沙</a> 发表了一篇日志 <a class="d" href="http://univspot.com/blog/102">我喜欢你是寂静的</a></p>
+              </dd>
+            </dl>
+          </div>
+
+          <div class="item" >
+
+            <dl>
+              <dt>
+                <a class="uh" href="javascript:;">
+                    <img src="/img/avatar/e26b07b95_s.jpg">
+                </a>
+              </dt>
+              <dd>
+                 <p><a class="u" href="">Jone</a> 回答了 <a class="u" href="">Mary</a>的问题<a class="d" href="http://univspot.com/blog/102">我喜欢你是寂静的</a></p>
+              </dd>
+            </dl>
+          </div>
+          <div class="item" >
+
+            <dl>
+              <dt>
+                  <a class="uh" href="javascript:;">
+                    <img src="/img/avatar/9ab6eb141_s.jpg">
+                  </a>
+              </dt>
+              <dd>
+                 <p><a class="u" href="">Swift </a>上传了一张照片</p>
+              </dd>
+            </dl>
+          </div>
+
+          <div class="item" >
+            <dl>
+              <dt>
+                <a class="uh" href="javascript:;">
+                  <img src="/img/avatar/f7675a265_s.jpg">
+                </a>
+              </dt>
+              <dd>
+                 <p><a class="u" href="">Swift </a> 评论了<a class="u" href="#">木清汤</a>的<a class="d" href="">日志</a></p>
+              </dd>
+            </dl>
+          </div>
+
+
+
+           <div class="item" >
+            <dl>
+
+              <dt>
+                    <a class="uh" href="javascript:;">
+                <img src="/img/avatar/e26b07b95_s.jpg">
+            </a>
+              </dt>
+              <dd>
+ <p><a class="u" href="">Jone</a> 回答了 <a class="u" href="">Mary</a>的问题<a class="d" href="http://univspot.com/blog/102">我喜欢你是寂静的</a></p>
+              </dd>
+
+
+            </dl>
+         
+             
+
+          </div>
+
+          <div class="item" >
+            <dl>
+              <dt>
+                 <a class="uh" href="javascript:;">
+                  <img src="/img/avatar/9ab6eb141_s.jpg">
+                </a>
+              </dt>
+              <dd>
+                 <p><a class="u" href="">Swift </a>上传了一张照片</p>
+              </dd>
+            </dl>
+           
+           
+          </div>
+        </div>
+
+          <div class="event" >
+                <h3>校内活动</h3>
+                <div class="item" >
+                  <span>女生节</span>
+                  <img src="/img/univ/1014435816082709469.jpg" width="80" height="80" >
+                  <p ><span>时间:</span>2012-10-30</p>
+                  <p><span>地点:</span>景行广场</p>
+                  <p><span>活动介绍:</span>
+                   问答分类标签bia我在univspot的问答...
+                  </p>
+                </div>
+              </div>
+         </div>
+
+
+            </div>
+
+            <!--end main_wrap-->
+        </div>
+
+        <script src="{{ STATIC_URL }}js/jquery-1.6.4.js" type="text/javascript" ></script>
+        <script src="{{ STATIC_URL }}js/gl.js" type="text/javascript" ></script>
+        <script type="text/javascript">
+          $(".ask_nav a").click(function(){
+            var id = $(this).attr("id");
+            $(".hide").hide();
+            $("."+id).show();
+            $(this).siblings("a").removeClass("ana_focus_current");
+            $(this).addClass("ana_focus_current");
+          });
+        </script>
+    </body>
+    </html>
+
+                          
+
+ 

@@ -1,0 +1,63 @@
+
+{% extends 'topic/i/base.html' %}
+
+
+
+
+{% block content %}
+                <div class="current_infor" style="float:left" >
+                         <h3>{{ current_user.nickname }}的话题</h3><span>（全部{{ total_count }}个）</span>
+                </div>
+                <div class="topic mytopic" >
+                    <ul>
+                        {% for t in topics %}
+                          <li >
+                            <h3 id='commentform{{ t.id }}' ><a href="/topic/{{ t.id }}">{{ t.topic }}</a></h3>
+                            <div class="response" >
+                                <span class="topic_reply slidedown" ><a onclick='topicComments(this,{{ t.id }})' href="javascript:void(0)">回应</a></span>
+                                <span class="topic_time" >{{ t.create_time|date:'Y-m-d H:i' }}</span>
+                            </div>
+                            <div class="comment topic_comment1" style="display: none" >
+                                <div class='loading' >
+                                    <img src="{{ STATIC_URL }}image/ajax-loader.gif" width='22' height='22' >
+                                    <span>
+                                        正在加载,请稍后...
+                                    </span>
+                                </div>
+                                <div class="commentcontent" >
+                                   {% include 'topic/topic_comment.html' %}
+                                </div>
+                                <span class="topic_reply slideup" style="position: absolute;bottom: 10px;right: 10px;font-size: 12px;" ><a href="javascript:void(0)">收起</a></span>
+                            </div>
+                          </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="page" >
+                    
+                    {% if page.prev_page_number and not less_than_certain_size %}
+                       <a href="{{ current_user_url }}/topic?page={{ page.prev_page_number }}" class="prev"> <<-上一页</a>
+                    {% endif %} 
+
+                         {% for key,value in pages %}
+
+                            {% ifequal page.page_number key %}
+
+                                <a href="{{ current_user_url }}/topic?page={{ key }}" style='color:#105CB6;font-weight:bolder;border-color:#fff' >  {{ value.page_number }}  </a>
+
+                            {% else %}
+
+                                <a href="{{ current_user_url }}/topic?page={{ key }}" >  {{ value.page_number }}  </a>
+
+                            {% endifequal %}
+
+                         {% endfor %}
+                       
+                        
+                    {% if page.has_next  and not less_than_certain_size %}
+                        <a href="{{ current_user_url }}/topic?page={{ page.next_page_number }}" class="next" >下一页->></a>
+                    {% endif %}
+
+              </div>
+{% endblock %}
+

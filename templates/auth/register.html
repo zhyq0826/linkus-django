@@ -1,0 +1,85 @@
+{% extends 'base/base.html' %}
+
+{% block style %}
+<style type="text/css">
+
+
+</style>
+{% endblock %}
+
+{% block script %}
+
+
+
+
+{% endblock %}
+
+{% block main %}
+
+    {% if G.email %}
+ 
+    <p style='color:#4f4f4f;margin-top:50px;' >已经注册，请到<span style='color:#ef9361' >{{ G.email }}</span>进行激活</div>
+
+    {% else %}
+
+                 <div class="register_form" >
+                    <h3>注册成为我们的用户</h3>
+                    <form action="/accounts/register/" method="post" >
+                        <div>
+                            <label for="email" >Email</label>
+                            {{ form.email }}
+                            
+                            {% if form.email.errors or  errors.email_existed %}
+                               <p class="error" >
+                                    {% for error in form.email.errors %}
+                                        {{ error }}
+                                    {% endfor %}
+                                {{ errors.email_existed }}
+                                <span class="arrow" ></span>
+                               </p>
+                            {% endif %}
+                        </div>
+
+                        <div>
+                            <label for="password" >密码</label>
+                                {{ form.password}}
+
+                            {% if form.password.errors or errors.passvalid %}
+                               <p class="error" >
+                                    {% for error in form.password.errors %}
+                                        {{ error }}
+
+                                    {% endfor %}
+                                    {{ errors.passvalid }}
+                                <span class="arrow" ></span>
+                               </p>
+                            {% endif %}
+                        </div>
+
+                        <div>
+                            <label for="nickname" >昵称</label>
+                                {{ form.nickname }}
+
+                            {% if form.nickname.errors or errors.nickname_existed %}
+                               <p class="error" >
+                                    {% for error in form.nickname.errors %}
+                                        {{ error }}
+                                    {% endfor %}
+                                {{ errors.nickname_existed }}
+                                <span class="arrow" ></span>
+                               </p>
+                            {% endif %}
+                        </div>
+                        <div class="tip_info" >
+                            <label></label>
+                            <input  class='button' type="submit" value="注册"/>
+                            <span class='login' >已有账号?</span>
+                            <a class='login' href="/accounts/login/" >登录</a>
+                            <br>
+                            <a href="/" style='display:inline-block;margin-left:70px;margin-top:30px' >返回首页</a>
+                        </div>
+                    </form>
+                </div>
+    {% endif %}
+
+{% endblock %}

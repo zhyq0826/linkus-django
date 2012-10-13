@@ -1,0 +1,66 @@
+
+{% extends 'setting/base.html' %}
+
+{% block selfstyle %}
+
+<style type="text/css">
+
+.error{
+    color: #D21A00;
+}
+
+</style>
+
+{% endblock %}
+
+{% block content %}
+
+				<div class="setting" >
+                    {% if G.success %}
+                         <p id='tip' class='tip' >保存成功</p>
+                    {% endif %}
+                    <form action='/setting/' name="base_form" method='post' >
+                        <p>
+                            <label for="username" >昵称</label>
+                            {{ form.nickname }}
+                            <span class='error' >
+
+                                {% for error in form.username.errors %}
+                                    {{ error }}
+                                {% endfor %}
+                                {{ errors.ni_error }}
+
+                            </span>
+                        </p>
+                        <p>
+                            <label for="head_ico" >头像</label>
+                            <img src="{{ avatar_url }}{{ user.avatar }}" width="160" height="160" id='head_ico' style='display:block' > 
+                            <label></label>
+                            <a style="color:#0000EE !important;text-decoration:none;display:inline-block;line-height:24px;height:24px;padding:2px 0px;" href="/setting/avatar/">修改头像</a>
+                        </p>
+
+
+                        <p>
+                            <label for="url" >博客地址</label>
+                            {{ form.blog }}
+                            <span class='error' >
+
+                                {% for error in form.url.errors %}
+                                    {{ error }}
+                                {% endfor %}
+
+                            </span
+                        </p>
+
+                        <p>
+                            <label style='text-align:center' >在主页介绍你自己</label>
+                            {{ form.signature }}
+                        </p>
+                        
+                        <p>
+                            <input type="submit" class="action"  value="保存修改" />
+                        </p>
+                    </form>
+                </div>
+
+{% endblock %}

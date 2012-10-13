@@ -1,0 +1,86 @@
+{% extends 'home/base.html' %}
+
+
+{% block script %}
+
+<script type="text/javascript">
+   $(document).ready(function(){
+
+   	   $('.micro_content textarea').elastic();
+  });	
+
+</script>
+
+  	     
+    
+{% endblock %}
+
+{% block style %}
+   
+
+    <style type="text/css">
+
+    </style>
+
+{% endblock %}
+
+
+
+                {%  block ihome  %}
+                        {% include 'home/ihome2.html' %}
+                        {% include 'home/hometab.html' %}
+                {% endblock %}
+
+                {% block menu %}
+
+
+
+                {% endblock %}
+
+                {% block content %}
+                  <div class="current_infor" >
+                   <h3>TA关注的</h3>
+                  </div>
+                    <div class="p_follow" >
+                      <ul>
+                        {% for f in following %}
+
+                          <li>
+                            <img src="{{ avatar_url }}{{ f.head }}"/>
+                            {% if f.url %}
+                               <a href="/people/{{ f.url }}">{{ f.nickname }}</a>
+                            {% else %}
+                               <a href="/people/{{ f.id }}">{{ f.nickname }}</a>
+                            {% endif %}
+                          </li>
+
+                        {% endfor %}
+                        
+                      </ul>
+                    </div>
+
+                    <div style="height:15px" ></div>
+
+                  <div class="current_infor" >
+                   <h3>关注TA的</h3>
+                  </div>
+                    <div class="p_follow" >
+                      <ul>
+                        {% for f in follower %}
+
+                          <li>
+                            <img src="{{ avatar_url }}{{ f.head }}"/>
+                            {% if f.url %}
+                               <a href="/people/{{ f.url }}">{{ f.nickname }}</a>
+                            {% else %}
+                               <a href="/people/{{ f.id }}">{{ f.nickname }}</a>
+                            {% endif %}
+                          </li>
+
+                        {% endfor %}
+                        
+                      </ul>
+                    </div>
+                {% endblock %}
+
+                

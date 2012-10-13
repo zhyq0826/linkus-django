@@ -1,0 +1,132 @@
+
+{% extends 'blog/i/base.html' %}
+
+ {% block title %}
+          <title>{{ article.title }}</title>
+  {% endblock %}
+
+
+ {% block selfstyle %}
+ 
+ {% endblock %}
+
+
+{% block ihome %}
+
+<div class="current_location" >
+  {% ifequal current_user.id user.id %}
+    <a  href="/read/" class="cl" >阅读</a><span>>></span><a class="cn" href="{{ user_url }}/blog">我的日记</a>
+    <a class="cr" href="/blog/create">写新日记</a>
+  {% else %}
+    <a  href="/read/" class="cl" >阅读</a><span>>></span><a class="cn" href="{{ current_user_url }}/blog">{{ current_user.nickname }}的日记</a>
+     <a class="cr" href="/blog/create">写新日记</a>
+  {% endifequal %}
+</div>
+
+{% endblock %}
+
+
+{% block content %}
+
+{% autoescape off %}
+
+              <div class="blog_detail" >
+
+                    <div class="title" >
+                        <a href="#" >{{ article.title }}</a>
+                    </div>
+
+                    <div class="author" >
+                        {% if author.url %}
+                           <a href="/people/{{ author.url }}">{{ author.nickname }}</a>
+                        {% else %}
+                         <a href="/people/{{ author.id }}">{{ author.nickname }}</a>
+                        {% endif %}
+                        
+                         <span class="time" >
+                          {{ article.create_time|date:'Y-m-d H:i' }}
+                        </span>
+                    </div>
+
+                    <div class="blog_tg" >
+                      {% if tags %}
+                        标签:<span>
+                                {% for t in tags %}
+
+                                 <a href="/article/tag/{{ t.id }}/{{ t.tag }}">{{ t.tag }}</a>
+
+                                {% endfor %}
+                              </span>
+                        {% endif %}
+
+                        {% if subjects %}
+
+                           主题:<span>
+                                   {% for s in subjects %}
+                                       <a href="/article/subject/{{ s.id }}/{{ s.subject }}">{{ s.subject }}</a>
+                                    {% endfor %}
+                               </span>
+
+                        {% endif %}
+                    </div>
+                    <div class="content" >
+                        <table  style="table-layout:fixed" width="700" >
+                            <tbody>
+                              <td style="word-wrap : break-word; overflow:auto; " >
+                            {{ article.content }}
+                          </td>
+                            </tbody>
+                        </table>
+                       
+                    </div>
+
+                   
+              {% include 'blog/blog_comment.html' %}
+
+
+              {% if next_article %}
+                  {% if one %}
+
+                  {% else %}
+                      <a id="im_next" title='{{ next_article.title }}' href='{{ current_user_url }}/blog/{{ next_article.id }}' class="im_next"  ></a>
+                  {% endif %}
+                 
+              {% endif %}
+
+             
+              {% if prev_article %}
+                  {% if one %}
+                     
+                  {% else %}
+                    <a id="im_prev" title='{{ prev_article.title }}' href='{{ current_user_url }}/blog/{{ prev_article.id }}' class="im_prev"></a>   
+                  {% endif %}
+                  
+              {% endif %}
+                           
+             </div>
+                   
+
+{% endautoescape %}
+
+{% endblock %}
+
+
+
+{% block selfscript %}
+
+  <script type="text/javascript" src='{{ STATIC_URL }}js/blog.js' ></script>
+  <script type="text/javascript">
+    $('#im_next,#im_prev').poshytip({
+        className: 'tip-twitter',
+        showTimeout: 1,
+        alignTo: 'target',
+        alignX: 'center',
+        offsetY: 5,
+        allowTipHover: false,
+        fade: false,
+        slide: false
+      });
+
+  </script>
+
+{% endblock %}

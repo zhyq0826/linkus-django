@@ -1,0 +1,205 @@
+
+{% extends 'blog/i/base.html' %}
+
+ {% block title %}
+          <title>{{ article.title }}</title>
+  {% endblock %}
+
+
+ {% block selfstyle %}
+    <style type="text/css">
+    body{
+      background-image: none;
+    }
+
+
+    </style>
+ {% endblock %}
+
+
+{% block ihome %}
+
+<div class="current_location" >
+  <a href="/blog/create" class="cr" >写新日记</a>
+</div> 
+
+{% endblock %}
+
+
+{% block content %}
+
+{% autoescape off %}
+
+        		  <div class="blog_detail" >
+
+                    <div class="title" >
+                        <a href="#" >{{ article.title }}</a>
+                    </div>
+                
+                    <div class="author" >
+                        {% if author.url %}
+                           <a href="/people/{{ author.url }}">{{ author.nickname }}</a>
+                        {% else %}
+                         <a href="/people/{{ author.id }}">{{ author.nickname }}</a>
+                        {% endif %}
+                        
+                         <span class="time" >
+                          {{ article.create_time|date:'Y-m-d H:i' }}
+                        </span>
+                    </div>
+
+                    <div class="blog_tg" >
+                      {% if tags %}
+                        标签:<span>
+                                {% for t in tags %}
+
+                                 <a href="/article/tag/{{ t.id }}/{{ t.tag }}">{{ t.tag }}</a>
+
+                                {% endfor %}
+                              </span>
+                        {% endif %}
+
+                        {% if subjects %}
+
+                           主题:<span>
+                                   {% for s in subjects %}
+                                       <a href="/article/subject/{{ s.id }}/{{ s.subject }}">{{ s.subject }}</a>
+                                    {% endfor %}
+                               </span>
+
+                        {% endif %}
+                    </div>
+                    
+                    <div class="content" >
+                        <table  style="table-layout:fixed" width="700" >
+                            <tbody>
+                              <td style="word-wrap : break-word; overflow:auto; " >
+                            {{ article.content }}
+                          </td>
+                            </tbody>
+                        </table>
+                       
+                    </div>
+                    <div class="art_bar" >
+                      <a class="reco" href="">收藏</a>
+                      <a class="reco" href="javascript:void(0)">推荐</a>
+                      <div class="like_bar" >
+                        <span>1293人</span><a class="like" href="javascript:void(0)"><i>♥</i>喜欢</a>
+                      </div>
+                      
+                    </div>
+
+                   
+              {% include 'blog/blog_comment.html' %}
+
+
+              {% if next_article %}
+                  {% if one %}
+
+                  {% else %}
+                      <a id="im_next" title='{{ next_article.title }}' href='/blog/{{ next_article.id }}' class="im_next"  ></a>
+                  {% endif %}
+                 
+              {% endif %}
+
+             
+              {% if prev_article %}
+                  {% if one %}
+                     
+                  {% else %}
+                    <a id="im_prev" title='{{ prev_article.title }}' href='/blog/{{ prev_article.id }}' class="im_prev"></a>   
+                  {% endif %}
+                  
+              {% endif %}
+                           
+             </div>
+
+             <div class="au_related" >
+                <div class="au_other_blog" >
+                  <h3>三月沙的其它文章</h3>
+                  <a href="/blog/101">做更好的自己</a>
+                  <a href="/blog/101">80后的三十而立之年</a>
+                  <a href="/blog/101">从“瞧不起”到“了不起“，也许只有一个勇气的距离</a>
+                  <a href="/blog/101">紫凌冰风Angie的日记</a>
+                  <a href="/blog/97">c++程序</a>
+                </div>
+
+                <div class="releated_blog" >
+                  <h3>相关文章</h3>
+                  <a href="/blog/101">做更好的自己</a>
+                  <a href="/blog/101">80后的三十而立之年</a>
+                  <a href="/blog/101">从“瞧不起”到“了不起“，也许只有一个勇气的距离</a>
+                  <a href="/blog/101">紫凌冰风Angie的日记</a>
+                  <a href="/blog/97">c++程序</a>
+                  <a href="/blog/101">做更好的自己</a>
+                  <a href="/blog/101">80后的三十而立之年</a>
+                  <a href="/blog/101">从“瞧不起”到“了不起“，也许只有一个勇气的距离</a>
+                  <a href="/blog/101">紫凌冰风Angie的日记</a>
+                  <a href="/blog/97">c++程序</a>
+                </div>
+
+                <div class="viewd_user" >
+                  <h3>文章状态</h3>
+                  <p>被浏览 1614 次，被推荐234次，123人浏览了这篇文章</p>
+                  <a href="javascript:;">
+                    <img src="/img/avatar/Xvd2012519124110WTpthumb.jpg">
+                  </a>
+                  <a href="javascript:;">
+                    <img src="/img/avatar/e26b07b95_s.jpg">
+                  </a>
+                  <a href="javascript:;">
+                    <img src="/img/avatar/9ab6eb141_s.jpg">
+                  </a>
+                  <a href="javascript:;">
+                    <img src="/img/avatar/e65ed8826_s.jpg">
+                  </a>
+                  <a href="javascript:;">
+                    <img src="/img/avatar/f7675a265_s.jpg">
+                  </a>
+                   <a href="javascript:;">
+                    <img src="/img/avatar/325c5b3c5_s.jpg">
+                  </a>
+
+                  <a href="javascript:;">
+                    <img src="/img/avatar/736b566db_s.jpg">
+                  </a>
+
+                   <a href="javascript:;">
+                    <img src="/img/avatar/219fc29ad_s.jpg">
+                  </a>
+
+                   <a href="javascript:;">
+                    <img src="/img/avatar/d1d8d4ed5_s.jpg">
+                  </a>
+
+                </div>
+             </div>
+                   
+
+{% endautoescape %}
+
+{% endblock %}
+
+
+
+{% block selfscript %}
+
+
+  <script src="{{ STATIC_URL }}js/blog.js" type="text/javascript" ></script>
+  
+  <script type="text/javascript">
+  $(document).ready(function(){
+    $('#im_next,#im_prev').poshytip({
+        className: 'tip-twitter',
+        showTimeout: 1,
+        alignTo: 'target',
+        alignX: 'center',
+        offsetY: 5,
+        allowTipHover: false,
+        fade: false,
+        slide: false
+      });
+  });
+  </script>
+
+{% endblock %}

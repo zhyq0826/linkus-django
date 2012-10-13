@@ -1,0 +1,32 @@
+
+{% extends 'home/base.html' %}
+
+
+{% block style %}
+ <link href="{{ STATIC_URL }}css/setting.css?{% now "U" %}" rel="stylesheet" type="text/css" media="screen" />
+{% endblock %}
+
+
+ {% block ihome  %}
+               <!-- <div class="ihome" style="padding:20px 0px;" >
+                    <div class="ihead" >
+                        <a href="#" ><img src="{{ avatar_url }}{{ user.head }}" width="40" height="40" /></a>
+                    </div>
+                    <div class="iinfor" >
+                        <h1><a href="#" >{{ user.nickname }}</a></h1>
+                        <p>软件工程师</p>
+                    </div>
+                </div> -->
+{% endblock %}
+
+{% block menu %}
+       {% include 'setting/setting_menu.html' %}
+{% endblock %}
+
+
+{% block script %}
+
+    <script src="{{ STATIC_URL }}js/setting.js" ></script>
+
+{% endblock %}
+

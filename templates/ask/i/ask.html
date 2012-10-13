@@ -1,0 +1,57 @@
+
+
+{% extends 'ask/i/base.html' %}
+
+
+
+{% block content %}
+
+			    <div class="ask" >
+                    {% for q in questions %}
+                         <div class="question" >
+
+                            <h2><a href="/question/{{ q.id }}" >{{ q.question }}</a></h2>
+                            
+                            <div class="q_state" >
+
+                                <span>{{ q.answer_count }}个回答</span>
+                                
+                                {% ifequal q.anonymity 1 %}
+                                     <span style="margin-left: 15px;" >匿名</span>
+                                {% endifequal %}
+
+                                <span class="time" >{{ q.create_time|date:'Y-m-d  H:i' }}</span>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+
+
+                <div class="page" >
+
+                    {% if page.prev_page_number and not less_than_certain_size %}
+                       <a href="{{ user_url }}/ask?page={{ page.prev_page_number }}" class="prev"> <<-上一页</a>
+                    {% endif %}
+
+                         {% for key,value in pages %}
+
+                            {% ifequal page.page_number key %}
+
+                                <a href="{{ user_url }}/ask?page={{ key }}" class="current_page" >  {{ value.page_number }}  </a>
+
+                            {% else %}
+
+                                <a href="{{ user_url }}/ask?page={{ key }}" >  {{ value.page_number }}  </a>
+
+                            {% endifequal %}
+
+                         {% endfor %}
+                       
+                        
+                    {% if page.has_next  and not less_than_certain_size %}
+                         <a href="{{ user_url }}/ask?page={{ page.next_page_number }}" class="next" >下一页->></a>
+                    {% endif %}
+
+              </div>
+{% endblock %}
+

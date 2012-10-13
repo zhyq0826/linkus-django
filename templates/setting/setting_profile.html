@@ -1,0 +1,159 @@
+
+{% extends 'setting/base.html' %}
+
+{% block selfstyle %}
+
+  <link href="{{ STATIC_URL }}css/smoothness/jquery.ui.datepicker.css" rel="stylesheet" type="text/css" media="screen" />
+  <link href="{{ STATIC_URL }}css/smoothness/jquery.ui.core.css" rel="stylesheet" type="text/css" media="screen" />
+  <link href="{{ STATIC_URL }}css/smoothness/jquery.ui.theme.css" rel="stylesheet" type="text/css" media="screen" />
+
+    <style type='text/css'>
+
+    .error{
+        color: #d21a00;
+        padding: 10px;
+    }
+
+    .tip{
+        color: #DDD;
+    }
+
+    </style>
+
+{% endblock %}
+
+
+
+{% block content %}
+
+                   <div class="setting" >
+                    <form  method="post" name='person_form' action="/setting/">
+                        <p>
+                            <label for="name">真实姓名</label>
+                            {{ form.name }}
+                            <span class="error">
+                               
+                            </span>
+                        </p>
+
+                        <p>
+                            <label>你是</label>
+                            {{ form.sex }}       
+                        </p>
+                        
+                         <p>
+                            <label for="position">你的身份</label>
+                            {{ form.position }}
+                            <span class="error">
+                            </span>
+                        </p>
+
+                        <p>
+                            <label for="birth">出生日期</label>
+                           {{ form.birth }}
+                            <span id='birtherror'  class="error">
+                                 
+                            </span>
+                        </p>
+
+                        <div class="home">
+                            <div class="first" >
+                                {{ form.province }}
+                                <label>你的家乡</label>
+                                <span class="virtual_select province">{{ pname }}</span>
+                                <ul id="province_options"> 
+                                    <li onclick="catch_city(110000)"> 北京 </li>
+                                    <li onclick="catch_city(120000)"> 天津 </li>
+                                    <li onclick="catch_city(130000)"> 河北 </li>
+                                    <li onclick="catch_city(140000)"> 山西 </li>
+                                    <li onclick="catch_city(150000)"> 内蒙古 </li>
+                                    <li onclick="catch_city(210000)"> 辽宁 </li>
+                                    <li onclick="catch_city(220000)"> 吉林 </li>
+                                    <li onclick="catch_city(230000)"> 黑龙江 </li>
+                                    <li onclick="catch_city(310000)"> 上海 </li>
+                                    <li onclick="catch_city(320000)"> 江苏 </li>
+                                    <li onclick="catch_city(330000)"> 浙江 </li>
+                                    <li onclick="catch_city(340000)"> 安徽 </li>
+                                    <li onclick="catch_city(350000)"> 福建 </li>
+                                    <li onclick="catch_city(360000)"> 江西 </li>
+                                    <li onclick="catch_city(370000)"> 山东 </li>
+                                    <li onclick="catch_city(410000)"> 河南 </li>
+                                    <li onclick="catch_city(420000)"> 湖北 </li>
+                                    <li onclick="catch_city(430000)"> 湖南 </li>
+                                    <li onclick="catch_city(440000)"> 广东 </li>
+                                    <li onclick="catch_city(450000)"> 广西 </li>
+                                    <li onclick="catch_city(460000)"> 海南 </li>
+                                    <li onclick="catch_city(500000)"> 重庆 </li>
+                                    <li onclick="catch_city(510000)"> 四川 </li>
+                                    <li onclick="catch_city(520000)"> 贵州 </li>
+                                    <li onclick="catch_city(530000)"> 云南 </li>
+                                    <li onclick="catch_city(540000)"> 西藏 </li>
+                                    <li onclick="catch_city(610000)"> 陕西 </li>
+                                    <li onclick="catch_city(620000)"> 甘肃 </li>
+                                    <li onclick="catch_city(630000)"> 青海 </li>
+                                    <li onclick="catch_city(640000)"> 宁夏 </li>
+                                    <li onclick="catch_city(650000)"> 新疆 </li>
+                                    <li onclick="catch_city(710000)"> 台湾 </li>
+                                    <li onclick="catch_city(810000)"> 香港 </li>
+                                    <li onclick="catch_city(820000)"> 澳门 </li>
+                                </ul>
+                            </div>
+                            <div class="second" >
+                                {{ form.city }}
+                                <span class="virtual_select city">{{ cname}}</span>
+                                <ul id="city_options"> 
+                                    
+                                </ul>
+                            </div>
+                            <div class="second" >
+                                {{ form.hometown }}
+                                <span class="virtual_select area">{{ aname }}</span>
+                                <ul id="area_options"> 
+                                    
+                                </ul>
+                            </div>
+                        </div>
+                        <p>
+                            <label for="favorite">你的喜好</label>
+                           {{ form.favorite }}
+                        </p>
+                        <p>
+                            <label for="skill">你的特长</label>
+                            {{ form.skill }}
+                        </p>
+                        <p>
+                            <input type="button" class="action" onclick='post_personl_data()' value="保存">   
+                        </p> 
+                    </form>
+                </div>
+
+
+{% endblock %}
+
+
+{% block selfscript %}
+
+    <script src="{{ STATIC_URL }}js/city.js" type="text/javascript"  charset="utf-8" ></script>
+    <script src="{{ STATIC_URL }}js/area.js" type="text/javascript"  charset="utf-8" ></script>
+    <script src="{{ STATIC_URL }}js/jquery.ui.core.min.js" ></script>
+    <script src="{{ STATIC_URL }}js/jquery.ui.datepicker.min.js" ></script>
+
+    <script type="text/javascript">
+
+          $(function() {
+                //初始化家乡信息
+                init({{ provinceID }},{{ cityID }})
+                $( "#birth" ).datepicker({
+                    dateFormat:'yy-mm-dd',
+                    showAnim:'fadeIn',
+                    changeMonth: true,
+                    changeYear: true,
+                    autoSize:false,
+                    showButtonPanel:false
+                });
+            });
+
+
+</script>
+      
+{% endblock %}

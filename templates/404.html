@@ -1,0 +1,93 @@
+{% extends 'base/base.html' %}
+     
+{% block style %}
+
+  <style type="text/css">
+            div.empty_chair{
+            	 margin-left: 100px;
+                margin-top: 50px;
+                float: left;
+                width: auto;
+                height: auto;
+                margin-bottom: 20px;
+            }
+
+            img{
+                float: left;
+            }
+
+            div.sorry{ 
+                margin-top: 70px;
+                text-align: left;
+                float: left;
+                margin-left: 30px;
+            }
+
+
+            .title{
+                font: normal  20px Arial, Helvetica, sans-serif;
+                position: relative;
+                letter-spacing: 2px;
+            }
+
+
+            p{
+                margin-left: 30px;
+                margin-top: 15px;
+                color: #424242;
+            }
+
+            .transfer{
+                margin-top: 15px;
+                font: normal  20px Arial, Helvetica, sans-serif;
+                position: relative;
+                letter-spacing: 2px;
+            }
+
+           div.sorry ul{
+                list-style: decimal;
+                padding-left: 30px;
+                font-size: 14px;
+            }
+
+           div.sorry li{
+                margin-bottom: 10px;
+                letter-spacing: 1px;
+            }
+
+
+
+
+
+        </style>
+
+{% endblock %}
+        
+{% block main %}
+
+  <div class="empty_chair" >
+                    <img src="/medias/image/404.jpg" />
+                </div>
+                <div class="sorry" >
+                    <h2 class="title" >人生的旅途总是充满了种种失望</h2>
+                    <p>
+                        ~就像这把空空的椅子
+                    </p>
+                    <h2 class="transfer" >但是你可以...</h2>
+                    <p>
+                    <ul>
+                        <li>
+                            无视它们，继续上路，go-><a href="/" >here</a>
+                        </li>
+                        <li>
+                            有问题，找政府？NO!还是找我们吧，go-><a href="#" >联系我们</a>
+                        </li>
+                        <li>
+                            找找有关这把椅子的故事，go-><a href="http://www.google.com" >Google</a>
+                        </li>
+                    </ul>
+                    </p>
+                </div>
+            </div>
+
+{% endblock %}

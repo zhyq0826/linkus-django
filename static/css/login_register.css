@@ -1,0 +1,179 @@
+/*-------------------- 登陆页---------------------*/
+
+.text,.password{
+    background: none repeat scroll 0 0 padding-box #ffffff;
+    border: 1px solid #bbbbbb;
+    border-radius: 3px 3px 3px 3px;
+    color: #333;
+    cursor: text;
+    display: inline-block;
+    font-size: 14px;
+    line-height: 18px;
+    padding: 6px 3px;
+    width: 220px;
+}
+
+#email,#password{
+   ime-mode: disable
+}
+
+
+
+input.text:focus,input.password:focus{
+    border-color: #91969B;
+    -webkit-box-shadow: 0 0 5px rgba(123,179,207,.6);
+    -moz-box-shadow: 0 0 5px rgba(123,179,207,.6);
+    box-shadow: 0 0 5px rgba(123,179,207,.6);
+}
+
+
+
+
+.button{
+    background: url("../image/univspot_button.png") top left no-repeat;
+    color: #FFFFFF;
+    width: 95px;
+    height: 33px;
+    border:none;
+    text-align: center;
+    background-position: 0 -100px; 
+}
+
+.button:hover{
+    background: url("../image/univspot_button.png") top left no-repeat;
+    background-position: 0 -158px; 
+}
+
+
+.login_form label,.register_form label{
+    float: left;
+    display: inline-block;
+    line-height:18px;
+    padding: 4px 2px;
+    width: 65px;
+}
+
+
+.login_form h3,.register_form h3{
+    text-align: left;
+    color: #333333;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    margin-bottom: 25px;
+    line-height:24px;
+}
+
+
+.login_form,.register_form{
+    margin-top: 50px;
+    float: left;
+    width: 580px;
+    margin-left: 50px;
+    text-align: left;
+}
+
+
+p.error{
+    display: inline-block;
+    position: relative;
+    background-color: #F9EFEF;
+    border:1px solid #DB7B7B;
+    width: 100px;
+    padding-left:3px;
+    line-height: 21px;
+    font-size: 12px;
+    color: #333;
+    margin-left:15px;
+    z-index: 999;
+}
+
+span.error{
+    display: block;
+    position: relative;
+    line-height: 21px;
+    font-size: 12px;
+    color: #d21a00;
+    z-index: 999;
+    margin-bottom:5px;
+}
+.arrow{
+    z-index: -999;
+    position: absolute;
+    top:5px;
+    left: -8px;
+    width: 8px;
+    height: 10px;
+    background: url("../image/left_arrow.png") scroll no-repeat -6px -3px;
+}
+
+
+.login_form div,.register_form div{
+    height:50px;
+}
+
+
+a{
+    letter-spacing: 1px;
+    text-decoration: none;
+    color: #1a66b3 !important;
+}
+
+span.tip{
+    margin-left:15px;
+    color: #666;
+    line-height:18px;
+    font-size:12px;
+}
+
+a:hover{
+    text-decoration:underline;
+}
+
+
+a.forget_password{
+     color: #f85050 !important;
+     text-decoration: none;
+}
+
+span.register{
+    margin-left: 30px;
+}
+
+span.login{
+    margin-left:30px;
+}
+
+
+/* 忘记密码 */
+.resetpassword{
+    margin-top:15%;
+    padding-left: 25%;
+    text-align: left;
+}
+
+.resetpassword h3{
+     text-align: left;
+    color: #333333;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    line-height:24px;
+}
+
+.resetpassword label{
+    float: left;
+    display: inline-block;
+    margin: 0px;
+    padding: 0px;
+    height: 23px;
+    line-height:23px;
+    padding-bottom: 4px;
+    width: 65px;
+}
+
+
+
+
+
+

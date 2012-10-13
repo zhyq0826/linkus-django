@@ -1,0 +1,62 @@
+                <div class="login_form" >
+                    <h3>登录</h3>
+                    <form action="/accounts/login/" method="post" >
+                        {% if errors.wrong %}
+                        <label></label>
+                        <span class='error' >
+                            {{ errors.wrong }}
+                        </span>
+                          
+                        {% endif %}
+
+                        <div>
+                            <label for="email" >邮箱</label>
+                            {{ form.email }}
+<!--                              {% if form.email.errors or  errors.unactive or errors.unregisted %}
+                               <p class="error" >
+                                     {% for error in form.email.errors %}
+                                        {{ error }}
+                                    {% endfor %}
+                                    
+                                    {{ errors.unactive }}
+
+                                    {{ errors.unregisted }}
+                                <span class="arrow" ></span>
+                               </p>
+                            {% endif %} -->
+                        </div>
+                        <div>
+                            <label for="password" >密码</label>
+                            {{ form.password }}
+
+                          <!--    {% if form.password.errors or  errors.unactive or errors.password_wrong %}
+                               <p class="error" >
+                                    {% for error in form.password.errors %}
+                                            {{ error }}
+                                    {% endfor %}
+                                    
+                                    {{ errors.password_wrong }}
+                                <span class="arrow" ></span>
+                               </p>
+                            {% endif %} -->
+                        </div>
+                        <div>
+                            <label></label>
+                            {{ form.remember }}
+                            <label for="remember" style="float:none;width:auto" >记住我</label>
+                        </div>
+
+                        <div>
+                            <label></label>
+                            <input id="submit" class="button" type="submit" value="登录"/>
+                            <span class='register' >没有账号?</span>
+                            <a class='register' href="/accounts/register/" >注册</a>                   
+                        </div>
+                        <p class="tip_info" >
+                            <label></label>
+                            <a class='forget_password' href="/accounts/resetpassword" style="" >忘记密码?</a>
+                            <span></span>
+                            <a href='/' style='margin-left:60px' >返回首页</a>
+                        </div>
+                    </form>
+                </div>

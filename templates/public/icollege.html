@@ -1,0 +1,81 @@
+{% extends 'public/base.html' %}
+{% load filter_tool %}
+
+
+{% block style %}
+ <link href="{{ STATIC_URL }}css/blog.css?{% now "U" %}" rel="stylesheet" type="text/css" media="screen" />
+ 
+ <style type="text/css">
+
+ </style>
+
+{% endblock %}
+
+
+{% block content %}
+
+
+{% include 'public/icollege_nav.html' %}
+
+  <div class="fl" >
+  	<div class="blog" style="font-size:12px" >
+        <div class="list" >
+            <ul>
+                {% for a in articles %}
+                    <li style="padding-bottom:0px" >
+
+                     <h3>
+                         <img align="left" src="{{ avatar_url }}{{ a.author.head }}" >
+                         <span class="au" >
+                           {% if a.author.url %}
+                            <a href="/people/{{ a.author.url }}">{{ a.author.nickname }}</a>
+                          {% else %}
+                            <a href="/people/{{ a.author.id }}">{{ a.author.nickname }}</a>
+                          {% endif %}
+                         </span>
+                      </h3> 
+
+                    <div class="title" >
+                        <a href="/blog/{{ a.article.id }}" >{{ a.article.title }}</a>
+                         <span class='time' >{{ a.article.create_time|date:'Y-m-d H:i' }}</span>
+                    </div>
+
+                    {% autoescape off %}
+                    <div class="content" >
+                        {{ a.article.content|cutwords:100 }}
+                    </div>
+
+                    <div style="text-align:right !important" >
+                       <a class="viewall" style="font-size:12px;diplay:inline-block;margin-bottom:5px;" href="/blog/{{ a.article.id }}">查看全文</a>
+                    </div>
+
+                    {% endautoescape%}
+                </li> 
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+  </div>
+  <div class="fr" >
+              <div class="wrap_subject" >
+                  <h3>focus的所有主题</h3>
+                  <div class="sj" style="padding-top:10px" >
+                    <ul>
+                      {% for s in subjects %}
+                        <li  ><a   class="subject" id="{{ s.id }}" href="/article/subject/{{ s.id }}/{{ s.subject }}">{{ s.subject }}({{ s.article_count }})</a></li>
+                      {% endfor %}
+                    </ul>
+                  </div>
+              </div>
+  </div>
+  <div class="page" >
+      {% if page.prev_page_number%}
+     <a href="/i/college/?page={{ page.prev_page_number }}" class="prev"> <<-上一页</a>
+     {% endif %}
+      
+     {% if page.has_next   %}
+         <a href="/i/college/?page={{ page.next_page_number }}" class="next" >下一页->></a>
+     {% endif %}
+  </div>
+
+{% endblock %}

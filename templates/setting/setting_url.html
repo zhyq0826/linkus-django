@@ -1,0 +1,46 @@
+{% extends 'setting/base.html' %}
+
+{% block content %}
+
+				<div class="setting" >
+                    {% if G.success %}
+                      <p class="tip" >修改成功</p>
+                    {% endif %}
+                    <form action='/' method='post' >
+                        {% if user.url %}
+                          <p style="color:#d21a00;font-size:14px" >你已经设置了个性域名:</p>
+                        {% else %}
+                          <p style="color:#333333;font-size:14px" >在此进行个性域名设置,由4-20位数字和字母组成:</p>
+                        {% endif %}
+
+                        <p>
+                            <label style="float:none" for="url" >个性域名</label> 
+                            {% if user.url %}
+
+                            <span style="display:inline-block;height:18px;padding:6px 3px;" >http://univspot.com/people/{{ user.url }}</span>
+                               
+                            {% else %}
+                               <span style="display:inline-block;height:18px;padding:6px 3px;" >http://univspot.com/people/</span>{{ form.url }}
+                            {% endif %}
+                           
+                            <span class='error' >
+
+                                {% for error in form.url.errors %}
+                                    {{ error }}
+                                {% endfor %}
+
+                                {{ errors.incorrect }}
+                            </span>
+                        </p>
+                        {% if user.url %}
+
+                        {% else %}
+                          <p>
+                            <input type="submit"  class="action" value="确认" />
+                          </p>
+                        {% endif %}
+                        
+                    </form>
+                </div>
+
+{% endblock %}

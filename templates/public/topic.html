@@ -1,0 +1,147 @@
+{% extends 'public/base.html' %}
+{% load filter_tool %}
+
+
+
+
+{% block style %}
+
+ <link href="{{ STATIC_URL }}css/topic.css?{% now "U" %}" rel="stylesheet" type="text/css" media="screen" />
+ <style type="text/css">
+
+.wrap_topic_ul {
+  list-style-type: none !important;
+  margin-left:0px !important;
+}
+
+.wrap_topic_ul li{
+  width:700px !important;
+}
+
+.wrap_topic_ul h3{
+  margin-left:0px !important;
+  padding-left:0px !important;
+}
+
+.commentcontent{
+  width:670px !important;
+}
+
+.comment ul{
+  width:670px !important;
+}
+
+.comment li{
+  width:670px !important;
+}
+
+.comment textarea{
+  width:648px !important;
+}
+
+.comment li table{
+  width:600px !important;
+}
+
+
+ </style>
+
+{% endblock %}
+
+
+{% block content %}
+
+{% include 'public/topic_nav.html' %} 
+
+  <div class="fl" >
+          	    <div class="topic" >
+                    <ul class="wrap_topic_ul">
+                        {% for t in topics %}
+                          <li id="t{{ t.p.id }}">
+
+
+                            <h3 id='commentform{{ t.p.id }}' ><a href="/topic/{{ t.p.id }}">{{ t.p.topic }}</a></h3>
+
+                            <div class="response" style="padding-top:5px" >
+
+                              {% if t.t %}
+                                 <span class="fl">
+                                     标签:
+                                     {% for s in t.t %}
+                                        <a href="#" >{{ s.tag }}</a>
+                                     {% endfor %}
+                                  </span>
+                                 {% endif %}
+                                  {% if t.s %}
+                                 <span class="fl">
+                                     主题:
+                                     {% for s in t.s %}
+                                        <a href="/topic/subject/{{ s.id }}/{{ s.subject }}" >{{ s.subject }}</a>
+                                     {% endfor %}
+                                  </span>
+                                 {% endif %}
+
+
+                                <span class="topic_reply slidedown" ><a onclick='topicComments(this,{{ t.p.id }})' href="javascript:void(0)">回应</a></span>
+
+                                <span >{{ t.p.comment_count }}条回应</span>
+                                
+                                <span class="topic_time" >{{ t.p.create_time|date:'Y-m-d H:i' }}</span>
+                                
+                                 <span class="au" >
+                                   {% if a.author.url %}
+                                    <a href="/people/{{ t.user.url }}">{{ t.user.nickname }}</a>
+                                  {% else %}
+                                    <a href="/people/{{ t.user.id }}">{{ t.user.nickname }}</a>
+                                  {% endif %}
+                                 </span>
+                            
+                            </div>
+
+                             <div class="commentcontent" style="display: none;" >
+                                <div class='loading' >
+                                    <img src="{{ STATIC_URL }}image/ajax-loader.gif" width='22' height='22' >
+                                    <span>
+                                        正在加载,请稍后...
+                                    </span>
+                                </div>
+
+                                <span class="topic_reply slideup" style="position: absolute;bottom: 10px;right: 10px;font-size: 12px;" ><a href="javascript:void(0)">收起</a></span>
+                            </div>
+
+                          </li>
+                        {% endfor %}
+                    </ul>
+            </div>
+  </div>
+  <div class="fr" >
+      <div class="wrap_subject" >
+        <h3>focus的所有主题</h3>
+          <div class="sj" style="padding-top:10px" >
+            <ul>
+              {% for s in subjects %}
+                <li  ><a   class="subject" id="{{ s.id }}" href="/ask/subject/{{ s.id }}/{{ s.subject }}">{{ s.subject }}({{ s.question_count }})</a></li>
+              {% endfor %}
+            </ul>
+          </div>
+      </div>
+  </div>
+  <div class="page" >
+      {% if page.prev_page_number%}
+     <a href="/ask/?page={{ page.prev_page_number }}" class="prev"> <<-上一页</a>
+     {% endif %}
+      
+     {% if page.has_next   %}
+         <a href="/ask/?page={{ page.next_page_number }}" class="next" >下一页->></a>
+     {% endif %}
+  </div>
+
+{% endblock %}
+
+
+{% block script %}
+
+
+<script src="{{ STATIC_URL }}js/topic.js" ></script>
+
+{% endblock %}

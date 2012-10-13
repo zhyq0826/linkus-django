@@ -1,0 +1,127 @@
+
+
+{% extends 'topic/i/base.html' %}
+
+ {% block title %}
+          <title>{{ t.topic }}</title>
+  {% endblock %}
+
+{% block selfstyle %}
+
+<style type="text/css">
+
+.loadingchange{
+    top:15px;
+    width:698px !important;
+    background-color: transparent;
+    height:70px;
+}
+
+.more{
+    text-align: left;
+    margin: 10px 0px;
+    color: #2b2b2b;
+}
+
+</style>
+   
+{% endblock %}
+
+
+
+{% block ihome %}
+
+<div class="current_location" >
+  {% ifequal current_user.id user.id %}
+    <h3><a  href="/topic" class="cl" >话题</a></h3><span>>></span><a class="cn" href="{{ user_url }}/topic">我的话题</a><a href="/topic/create" class="cr" >创建新话题</a>
+  {% else %}
+   <h3><a  href="/topic" class="cl" >话题</a></h3><span>>></span><a class="cn" href="{{ current_user_url }}/topic">{{ current_user.nickname }}的话题</a>
+   <a href="/topic/create" class="cr" >创建新话题</a>
+  {% endifequal %}
+
+</div>
+
+{% endblock %}
+
+{% block content %}
+
+                <div class="topic topic_detail" >
+                    <div style="border-bottom:1px dotted #ccc;padding-bottom:10px" >
+                      <h3 id='commentform{{ t.id }}' >{{ t.topic }}</h3>
+                      <div class="t_tag" >
+                          {% if tags %}
+                          标签:<span>
+                                  {% for t in tags %}
+
+                                   <a href="/topic/tag/{{ t.id }}/{{ t.tag }}">{{ t.tag }}</a>
+
+                                  {% endfor %}
+                                </span>
+                          {% endif %}
+
+                          {% if subjects %}
+
+                          主题:<span>
+                                     {% for s in subjects %}
+                                         <a href="/topic/subject/{{ s.id }}/{{ s.subject }}">{{ s.subject }}</a>
+                                      {% endfor %}
+                                 </span>
+
+                          {% endif %}
+                      </div>
+                      
+                    </div>
+                    
+                    {% autoescape off %}
+                    <div class='more' >
+                        {% if t.more  %}
+
+                         {{ t.more }}
+
+                        {% endif %}
+                    </div>
+                    {% endautoescape %}
+                    <div class="response" >
+                        <span>创建于&nbsp;{{ t.create_time|date:'Y m d H:i' }}</span>
+                        <span class="topic_user" >
+                          {% if t.user.url %}
+                            <a href="/people/{{ t.user.url }}" >{{ t.user.nickname }}</a>
+                          {% else %}
+                            <a href="/people/{{ t.user.ud }}" >{{ t.user.nickname }}</a>
+                          {% endif %}
+                        </span>
+                    </div>
+                    
+                </div>
+
+                {% include 'topic/topic_comment.html' %}
+
+                
+                  <div class="page" >
+
+                      {% if page.prev_page_number and not less_than_certain_size %}
+                           <a href="/topic/{{ t.id }}?page={{ page.prev_page_number }}" class="prev"> <<-上一页</a>
+                      {% endif %}
+
+                       {% for key,value in pages %}
+
+                          {% ifequal page.page_number key %}
+
+                              <a href="/topic/{{ t.id }}?page={{ key }}" style='color:#105CB6;font-weight:bolder;border-color:#fff' >  {{ value.page_number }}  </a>
+
+                          {% else %}
+
+                              <a href="/topic/{{ t.id }}?page={{ key }}" >  {{ value.page_number }}  </a>
+
+                          {% endifequal %}
+
+                       {% endfor %}
+                       
+                        
+                       {% if page.has_next  and not less_than_certain_size %}
+                           <a href="/topic/{{ t.id }}?page={{ page.next_page_number }}" class="next" >下一页->></a>
+                       {% endif %}
+
+              </div>
+{% endblock %}
+

@@ -1,0 +1,28 @@
+                <div class="ihometab" >
+
+                    {% ifequal current_user.id user.id %}
+
+                       <ul>
+                        <li><a href="{{ current_user_url }}" class='' >主页</a> </li>
+                        <li><a href="{{ current_user_url }}/follow" class="{{ follow_current }}" >关注</a> </li>
+                        <li><a href="{{ current_user_url }}/blog" class="{{ blog_current }}" >日记</a> </li>
+                        <li><a href="{{ current_user_url }}/topic" class="{{ topic_current }}" >话题</a> </li>
+                        <li><a href="{{ current_user_url }}/ask" class="{{ ask_current }}" >问答</a> </li>
+                        <li><a href="{{ current_user_url }}/profile" class="{{ profile_current }}" >个人资料</a></li>
+                      </ul>
+
+                    {% else %}
+
+                     <ul>
+                        <li><a href="{{ current_user_url }}" class='' >主页</a> </li>
+                        <li><a href="{{ current_user_url }}/follow" class="{{ follow_current }}" >关注</a> </li>
+                        <li><a href="{{ current_user_url }}/blog" class="{{ blog_current }}" >日记</a> </li>
+                        <li><a href="{{ current_user_url }}/topic" class="{{ topic_current }}" >话题</a> </li>
+                        <li><a href="{{ current_user_url }}/ask" class="{{ ask_current }}" >问答</a> </li>
+                        <li><a href="{{ current_user_url }}/profile" class="{{ profile_current }}" >个人资料</a></li>
+                      </ul>
+
+                    {% endifequal %}
+                    
+                </div>
+

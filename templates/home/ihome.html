@@ -1,0 +1,43 @@
+                <div class="ihome" >
+                    <div class="ihead" >
+                        <a href="#" ><img src="{{ avatar_url }}{{ current_user.avatar }}" width="120" height="120" /></a>
+                    </div>
+
+                    <div class="iinfor" >
+                        {% ifequal current_user.id user.id %}
+
+                        {% else %}
+                            <div class="follow" >
+                                {% if followed %}
+                                   <a href="javascript:void(0)"  class="follow followed" >取消关注</a>
+                                    <input type="hidden" value="{{ current_user.id }}" />
+                                {% else %}
+
+                                  <a href="javascript:void(0)" class="follow" >关注TA</a>
+                                    <input type="hidden" value="{{ current_user.id }}" />
+
+                                {% endif %}
+                                
+                            </div>
+                        {% endifequal %}
+                       
+                        <h1><a href="#" >{{ current_user.nickname }}</a></h1>
+                        <p>软件工程师</p>
+                        <p>
+                            {% if current_user.blog %}
+                               <span>博客:<a style="color:#0000ee" href="{{ current_user.blog }}" >{{ current_user.blog }}</a></span>
+                            {% else %}
+
+                            {% endif %}
+                            
+                        </p>
+                        <div class="ideclare" >
+                            {% if current_user.signature %}
+                               <p><span class="quote_l" ><b>“</b></span>{{ current_user.signature }}<span class="quote_r" ><b>”</b></span></p>
+                            {% else %}
+                               <p></p>
+                            {% endif %}
+                           
+                        </div>
+                    </div>
+                </div>

@@ -1,0 +1,103 @@
+
+{% extends 'blog/i/base.html' %}
+
+{% block selfstyle %}
+
+
+<link rel="stylesheet" href="{{ STATIC_URL }}js/ueditor/themes/default/ueditor.css"/>
+
+  <style type='text/css'>
+
+   .error{
+      line-height:18px;
+      height:28px;
+      color: #d21a00;
+      padding:10px 0px;
+      padding-left:15px;
+      float: left;
+   }
+
+  </style>
+
+{% endblock %}
+
+
+
+{% block ihome %}
+
+<div class="current_location" >
+  <a  href="javascript:void(0);" class="cl" >日记</a><span>>></span><span>写新日记</span><a href="{{ user_url }}/blog" class="cr" >我的日记</a>
+</div>
+
+{% endblock %}
+
+
+{% block menu %}
+
+
+{% endblock %}
+
+
+{% block content %}
+
+                 <form action="/blog/create" method="post" >
+        			    <div class="new_article" >
+                        <p>
+                            <label for="title" >题目</label><br/>
+                           {{ form.title }}
+                           <span class='error' >{% for error in form.title.errors  %}  {{ error }} {% endfor %} </span>
+                        </p>
+                        <p>
+                            <label for="content" >正文</label><br/>
+                            {{ form.content }}
+                        </p>
+
+                        <p>
+                            <input type="submit" class="action"  value="发表" />
+                            <a class='cancel'  href="{{ user_url }}/blog">取消</a>
+                        </p>
+                </div>
+
+                
+                <div class="wrap_subject" >
+                  <div class="sj">
+                    <h3>选择主题：</h3>
+                    <ul>
+                      {% for s in subjects %}
+
+                        <li><a class="subject" id="{{ s.id }}" href="javascript:void(0)">{{ s.subject }}</a></li>
+
+                      {% endfor %}
+                      
+                    </ul>
+                  </div>
+                  <div class="tg" >
+                      <label for="tag" class="sl" >选择标签:</label>
+                      <input type="text" name='tagtext' id="tag" autocomplete="off" class="text"  >
+                  </div>
+                </div>
+                </form>
+{% endblock %}
+
+{% block selfscript %}
+
+<script type="text/javascript" src="{{ STATIC_URL }}js/ueditor/editor_config.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/ueditor/editor_all.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/complete.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/blog.js"></script>
+
+<script type="text/javascript">
+  var editor=null;
+  $(document).ready(function(){
+        editor = new baidu.editor.ui.Editor({ 
+                      autoFloatEnabled:true,
+                      textarea : 'editorValue',
+                      initialStyle: 'body{font-size: 14px; font-family:Arial,Helvetica,sans-serif;font-weight:normal;color:#333333 !important}'
+                  });
+        editor.render("content");
+  })
+    
+</script>
+
+
+{% endblock %}

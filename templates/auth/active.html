@@ -1,0 +1,66 @@
+{% extends 'base/base.html' %}
+
+{% block style %}
+    <style type="text/css">
+
+    .error{
+        color: #d21a00;
+        padding: 20px;
+    }
+
+    .tip{
+        color: #DDD;
+    }
+
+    p{
+    	color:#4f4f4f;
+    	margin-top:150px;
+    	font-size:16px;
+    	margin-bottom:100px;
+    	letter-spacing: 2px;
+    }
+
+    a{
+    	color:#ef9361;
+    	font-size:16px;
+    	letter-spacing: 2px;
+    }
+
+    </style>
+
+{% endblock %}
+
+
+
+{%  block main  %}
+
+	 {% if G.actived %}
+	 
+	    <p>账户被激活，请到点击<a href='/accounts/login/' >登录</a></p>
+
+	 {% endif%}
+
+	 {% if G.ck_error %}
+
+	   <p>激活码有误，请重新激活</p>
+
+	{% endif %}
+
+	{% if G.created %}
+
+		<p>账户已经激活，此链接无效，请到点击<a href='/accounts/login/' >登录</a></p>
+	{% endif %}
+
+	{% if G.no_existed %}
+	     
+	     <p>账户无效，请检查账户是已经注册，账户抒写是否有误<a href='/accounts/login/'>登录</a></p>
+
+	{% endif %}
+
+	{% if G.error %}
+
+	  <p>激活有误，请检查激活链接是否有误</p>
+
+	{% endif %}
+
+{% endblock %}

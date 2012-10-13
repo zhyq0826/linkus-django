@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>插入链接</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <script type="text/javascript" src="../internal.js"></script>
+    <style type="text/css">
+        *{color: #838383}
+        body {
+            font-size: 12px;
+            width:382px;
+            height:50px;
+            overflow: hidden;
+            margin:0px;
+            padding:0px;
+        }
+         span.txt{
+             width: 80px;
+             height:24px;
+             line-height: 24px;
+             display: block;
+             color:#2b2b2b;
+             font-size: 14px;
+            
+         }
+        #link_href,#title{
+            width:100%;
+            display: block;
+            height:28px;
+            background: #FFF;
+            border:1px solid #d7d7d7;
+            padding: 0px; margin: 0px;
+            line-height:28px;
+            font: 14px Arial, Helvetica, sans-serif;
+            
+        }
+
+        #target{
+            display: inline-block;
+            height:24px;
+            line-height:24px;
+            margin: 3px;
+        }
+        
+        .content{
+            margin: 4px 10px 8px ;
+            padding: 0px 0px;
+        }
+        
+        .content div{
+            margin: 4px 0px;
+            
+        }
+
+        label{
+            display:inline-block;
+            line-height:20px;
+            height:20px;
+            float: left;
+        }
+        .red{color:red;}
+    </style>
+</head>
+<body>
+<div class="content">
+    <div>
+        <span class="txt">显示文本：</span><input id="title" type="text"/>
+    </div>
+    <div>
+        <span class="txt">链接地址：</span><input id="link_href" type="text" />
+    </div>
+    <div>
+         <span id="msg2" class="red"></span>
+    </div>
+    
+    <div>
+        <label for="target" >是否在新窗口打开：</label><input  id="target" type="checkbox"/>
+    </div>
+</div>
+<script type="text/javascript">
+
+    var link = editor.selection.getRange().collapsed ? editor.queryCommandValue( "link" ):editor.selection.getStart(),url;
+    link = domUtils.findParentByTagName( link, "a", true );
+    if(link){
+        url = link.getAttribute( 'data_ue_src' ) || link.getAttribute( 'href', 2 );
+    }
+    $G("title").value = url ? link.title : "";
+
+    $G("link_href").value = url ? url.replace(/^(?:https?:\/\/)|(?:\/)$/ig,"") : '';
+    $G("target").checked = url && link.target == "_blank" ? true :  false;
+
+    var ipt = $G("link_href");
+    $focus(ipt);
+    ipt.style.cssText = 'border:1px solid #ccc;background-color:#fafafa;';
+    ipt.onfocus = function(){
+        this.style.cssText = 'border:1px solid #ccc;background-color:#fff;';
+    }
+    ipt.onblur = function(){
+        this.style.cssText = 'border:1px solid #ccc;background-color:#fafafa;';
+    }
+
+   
+    function handleDialogOk(){
+        var href;
+        if(href = $G('link_href').value.replace(/^\s+|\s+$/g, '')){
+            editor.execCommand('link', {
+                'href' : href,
+                'target' : $G("target").checked ? "_blank" : '_self',
+                'title' : $G("title").value.replace(/^\s+|\s+$/g, ''),
+                'data_ue_src':href
+            });
+            dialog.close();
+        }else{
+            $G("msg2").innerHTML = "请输入链接地址！";
+        }
+    }
+    dialog.onok = handleDialogOk;
+    $G('link_href').onkeydown = function(evt){
+        evt = evt || window.event;
+        if (evt.keyCode == 13) {
+            handleDialogOk();
+            return false;
+        }
+    };
+
+
+</script>
+</body>
+</html>

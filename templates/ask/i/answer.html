@@ -1,0 +1,29 @@
+{% extends 'ask/i/base.html' %}
+{% load filter_tool %}
+
+
+
+
+
+{% block content %}
+
+
+       <div class="ask" >
+              {% for q_id,user_id,question,a_id,answer,create_time in answered_questions %}
+
+                  <div class="question" >   
+                      <h2><a href="/question/{{ q_id }}#{{ a_id }}" >{{ question }}</a></h2>
+                      <span style="font-size: 14px; margin-bottom: 5px;color: #666;  " >我的回答:</span>
+                      <div class="ianswer" style="margin-top: 5px;color:#111;line-height: 22px;" >
+                          {{ answer|cutwords:40}}
+                      </div>
+                      <span class="itime" >{{ create_time|date:'Y-m-d H:i' }}</span>
+                   </div>
+                  
+              {% endfor %}
+      </div>
+
+                
+
+{% endblock %}
+

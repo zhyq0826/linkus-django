@@ -1,0 +1,182 @@
+{% extends 'public/base.html' %}
+{% load filter_tool %}
+
+
+{% block style %}
+ <link href="{{ STATIC_URL }}css/blog.css?{% now "U" %}" rel="stylesheet" type="text/css" media="screen" />
+ 
+ <style type="text/css">
+
+ </style>
+
+{% endblock %}
+
+
+{% block content %}
+
+  <div class="fl" >
+  	           <div class="dynamic_list" >
+                    <ul>
+                        <li class="wrap_dyna" >
+                          <div class="post_author_img" >
+                            <a class="" href="/people/nauto/">
+                            <img src="/img/avatar/kfS20125191357EeP.jpg" width="64" height="64">
+                          </a>
+                          </div>
+                          
+                           <div class="post_author" >
+                              <a href="/people/naruto">三月沙</a>上传了图片
+                           </div>
+                           <div class="photo_set" >
+                              <div class="img" >
+                                 <img src="/img/univ/28991922618752718.jpg" width="250" height="300" />
+                              </div>
+                           </div>
+                           <div class="meta_info" > 
+                              <div class="tags" >
+                                <span>标签:</span>
+                                <a href="">#摄影</a>
+                                <a href="">#清新</a>
+                                <a href="">#宁夏</a>
+                              </div>
+                              <div class="crl" >
+                                <a href="javascript:;">转载(23)</a>
+                                <a href="javascript:;">评论(345)</a>
+                                <a href="javascript:;">推荐(234)</a>
+                                <a class="like" href="javascript:;"><i>♥</i></a>
+                              </div>
+                           </div>
+                        </li>
+
+                         <li class="wrap_dyna" >
+
+                           <div class="post_author_img" >
+                            <a class="" href="/people/nauto/">
+                            <img src="/img/avatar/kfS20125191357EeP.jpg" width="64" height="64">
+                          </a>
+                          </div>
+
+                           <div class="post_author" >
+                              <a href="/people/naruto">三月沙</a>发表了日志
+                           </div>
+                           <div class="post_blog" >
+                            <div class="title" >
+                              <h3><a href="/blog/12">asdfasdfasdf</a></h3>
+                            </div>
+                            <div class="content" >
+                                下午干完活，客户握我的手连声说谢谢，然后要帮我把包提到我肩上，一下没提动，惊诧：“这么沉。。。没想到。”<br>我一乐：“就当锻炼身体了呗。”<br><br>从虹口体育场打车到虹桥要100块钱，昨天我就试过了。所以今天看时间还来得及，就打听怎么坐地铁，才5块就够了。虽然打车费可以跟客户报销，不过没必要的花销，又何必去浪费，尽管那个钱省下来不是我的，客户也未必在意，可我觉得事无巨细，谁的钱不是钱呢。<br><br>坐了五个小时高铁，终于熬到北京，已是子夜。下了车，木木地站在昏暗的月台，很缺德地点了一根烟，背着包等了一会，出口通道里人太多，乌泱泱一片忽高忽低的脑袋。<br>可出了检票口，这些脑袋一分流到偌大的南站，突然间显得稀稀拉拉起来。脚步声都有了空旷的回音。<br>看他们多数是去往出租车方向的，我就不跟他们挤了，坐地铁吧。<br>过去一看，也没能赶上末班地铁，太晚了。那走出站再打车吧。南站实在太大，走出去也要十来分钟。<br><br>结果，我走着走着就走回了公司，晚上挺凉快的。肩上原先还觉得沉重的包也显得越来越不是那么回事。<br>这么些年来，好像我对苦和累一直很麻木。<br>大陆说我的特点是能忍，其实我真没觉得这是忍，好歹得是让人难受
+                            </div>
+                           </div>
+                           <div class="meta_info" > 
+                              <div class="tags" >
+                                <span>标签:</span>
+                                <a href="">#摄影</a>
+                                <a href="">#清新</a>
+                                <a href="">#宁夏</a>
+                              </div>
+                              <div class="crl" >
+                                <a href="javascript:;">转载(23)</a>
+                                <a href="javascript:;">评论(345)</a>
+                                <a href="javascript:;">推荐(234)</a>
+                                <a class="like" href="javascript:;"><i>♥</i></a>
+                              </div>
+                           </div>
+                        </li>
+
+
+                        <li class="wrap_dyna" >
+                                <div class="post_author_img" >
+                            <a class="" href="/people/nauto/">
+                            <img src="/img/avatar/kfS20125191357EeP.jpg" width="64" height="64">
+                          </a>
+                          </div>
+                           <div class="post_author" >
+                              <a href="/people/naruto">三月沙</a>发表了日志
+                           </div>
+                           <div class="post_blog" >
+                            <div class="title" >
+                              <h3><a href="/blog/12">asdfasdfasdf</a></h3>
+                            </div>
+                            <div class="content" >
+                                下午干完活，客户握我的手连声说谢谢，然后要帮我把包提到我肩上，一下没提动，惊诧：“这么沉。。。没想到。”<br>我一乐：“就当锻炼身体了呗。”<br><br>从虹口体育场打车到虹桥要100块钱，昨天我就试过了。所以今天看时间还来得及，就打听怎么坐地铁，才5块就够了。虽然打车费可以跟客户报销，不过没必要的花销，又何必去浪费，尽管那个钱省下来不是我的，客户也未必在意，可我觉得事无巨细，谁的钱不是钱呢。<br><br>坐了五个小时高铁，终于熬到北京，已是子夜。下了车，木木地站在昏暗的月台，很缺德地点了一根烟，背着包等了一会，出口通道里人太多，乌泱泱一片忽高忽低的脑袋。<br>可出了检票口，这些脑袋一分流到偌大的南站，突然间显得稀稀拉拉起来。脚步声都有了空旷的回音。<br>看他们多数是去往出租车方向的，我就不跟他们挤了，坐地铁吧。<br>过去一看，也没能赶上末班地铁，太晚了。那走出站再打车吧。南站实在太大，走出去也要十来分钟。<br><br>结果，我走着走着就走回了公司，晚上挺凉快的。肩上原先还觉得沉重的包也显得越来越不是那么回事。<br>这么些年来，好像我对苦和累一直很麻木。<br>大陆说我的特点是能忍，其实我真没觉得这是忍，好歹得是让人难受
+                            </div>
+                           </div>
+                           <div class="meta_info" > 
+                              <div class="tags" >
+                                <span>标签:</span>
+                                <a href="">#摄影</a>
+                                <a href="">#清新</a>
+                                <a href="">#宁夏</a>
+                              </div>
+                              <div class="crl" >
+                                <a href="javascript:;">转载(23)</a>
+                                <a href="javascript:;">评论(345)</a>
+                                <a href="javascript:;">推荐(234)</a>
+                                <a class="like" href="javascript:;"><i>♥</i></a>
+                              </div>
+                           </div>
+                        </li>
+
+
+                        <li class="wrap_dyna" >
+                                <div class="post_author_img" >
+                            <a class="" href="/people/nauto/">
+                            <img src="/img/avatar/kfS20125191357EeP.jpg" width="64" height="64">
+                          </a>
+                          </div>
+                           <div class="post_author" >
+                              <a href="/people/naruto">三月沙</a>说:
+                           </div>
+                           <div class="post_blog" >
+                              <div class="content" >
+                                  佳能（加拿大）已经开始向经销商确认EOS-1D X的预售名单。据称经销商必须能够证明预订相机的顾客是CPS（佳能专业服务）会员，并且已经支付订金。如果你购买1D X是用于奥运会，则会被优先考虑。7月佳能在全球将少量出货一批1D X，不过不同地区具体的限购条件可能有所不同。http://t.cn/zOsmwFf
+                              </div>
+                           </div>
+                           <div class="meta_info" > 
+                            <div class="tags" >
+                                <span>标签:</span>
+                              </div>
+                              <div class="crl" >
+                                <a href="javascript:;">转载(23)</a>
+                                <a href="javascript:;">评论(345)</a>
+                                <a href="javascript:;">推荐(234)</a>
+                                <a class="like" href="javascript:;"><i>♥</i></a>
+                              </div>
+                           </div>
+                        </li>
+
+                        <li class="wrap_dyna" >
+                                <div class="post_author_img" >
+                            <a class="" href="/people/nauto/">
+                            <img src="/img/avatar/kfS20125191357EeP.jpg" width="64" height="64">
+                          </a>
+                          </div>
+                           <div class="post_author" >
+                              <a href="/people/naruto">三月沙</a>推荐了:
+                           </div>
+                           <div class="post_blog" >
+                              <div class="content" >
+                                  佳能（加拿大）已经开始向经销商确认EOS-1D X的预售名单。据称经销商必须能够证明预订相机的顾客是CPS（佳能专业服务）会员，并且已经支付订金。如果你购买1D X是用于奥运会，则会被优先考虑。7月佳能在全球将少量出货一批1D X，不过不同地区具体的限购条件可能有所不同。http://t.cn/zOsmwFf
+                              </div>
+                           </div>
+                           <div class="meta_info" > 
+                            <div class="tags" >
+                                <span>标签:</span>
+                              </div>
+                              <div class="crl" >
+                                <a href="javascript:;">转载(23)</a>
+                                <a href="javascript:;">评论(345)</a>
+                                <a href="javascript:;">推荐(234)</a>
+                                <a class="like" href="javascript:;"><i>♥</i></a>
+                              </div>
+                           </div>
+                        </li>
+                    </ul>
+                </div>
+  </div>
+  <div class="fr" >
+      
+  </div>
+
+
+{% endblock %}

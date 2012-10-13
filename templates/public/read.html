@@ -1,0 +1,309 @@
+{% load filter_tool %}
+<!DOCTYPE html>
+<html>
+    <head>
+        {% block title %}
+          <title>{{ pagetitle }}</title>
+        {% endblock %}
+        
+        <meta content="IE=edge" http-equiv="X-UA-Compatible">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link href="{{ STATIC_URL }}css/site.css?{% now "U" %}" rel="stylesheet" type="text/css" media="screen" />
+        <link href="{{ STATIC_URL }}css/style.css?{% now "U" %}" rel="stylesheet" type="text/css" media="screen" />
+
+         <link href="{{ STATIC_URL }}css/blog.css?{% now "U" %}" rel="stylesheet" type="text/css" media="screen" />
+ 
+       <style type="text/css">
+
+       </style>
+    </head>
+    <body>
+    
+
+        <div id="nav_wrap" >
+            {% include 'home/nav.html' %}
+        </div>
+
+         <div id="main_wrap" >
+            <div id="main">
+
+              <div class="ft" >
+                <div class="gmenu" >
+                  <ul>
+                    <li class="us current_gmenu" ><a href="javascript:void(0);" >univspot 主题</a></li>
+                    <li class="uc" ><a href="javascript:void(0);">univspot 专栏</a></li>
+                    <li class="ub" ><a href="javascript:void(0);">univspot 读书</a></li>
+                  </ul>
+                </div>
+
+                <div class="usubject u" style="display:block" >
+                    <div class="sjt" >
+                      <ul>
+                        {% for s in subjects %}
+                          <li  ><a  id="{{ s.id }}" href="/article/subject/{{ s.id }}/{{ s.subject }}">{{ s.subject }}</a></li>
+                        {% endfor %}
+                      </ul>
+                    </div> 
+                </div>
+
+                <div class="ucolumn u">
+                    <div class="sjt" >
+                      <ul>
+                            <li><a target="_blank" href="/column/we">东西客栈</a></li>
+                            <li><a target="_blank" href="/column/newyorker">纽约客</a></li>
+                            <li><a target="_blank" href="/column/mgck">美国参考</a></li>
+                            <li><a target="_blank" href="/column/globalbookreview">全球书评</a></li>
+                            <li><a target="_blank" href="/column/heima">黑马专栏</a></li>
+                            <li><a target="_blank" href="/column/economist">经济学人</a></li>
+                            <li><a target="_blank" href="/column/skykiwi">天维网</a></li>
+                            <li><a target="_blank" href="/column/quora">quora</a></li>
+                      </ul>
+                    </div>
+                </div>
+
+
+                <div class="ubook u">
+                    <div class="sjt" >
+                      <ul>
+                        <li><a target="_blank" href="/column/we">编辑推荐</a></li>
+                            <li><a target="_blank" href="/column/newyorker">畅销排行</a></li>
+                            <li><a target="_blank" href="/column/mgck">热门书评</a></li>
+                      </ul>
+                    </div>
+                </div>
+
+              </div>
+
+              <div class="read_choose" >
+                <a href="javascript:void(0)">读文</a>
+                <a href="javascript:void(0)">读图</a>
+              </div>
+
+              
+                  <div class="blog_column" >
+                   {% for a in articles %}
+
+                    <div class="column_item" > 
+                       <div class="title" >
+                            <h3><a href="/blog/{{ a.article.id }}" >{{ a.article.title }}</a></h3>
+                       </div>
+
+                        <div class="au" >
+                          {% if a.author.url %}
+                              <a href="/people/{{ a.author.url }}">{{ a.author.nickname }}</a>
+                            {% else %}
+                              <a href="/people/{{ a.author.id }}">{{ a.author.nickname }}</a>
+                            {% endif %}
+                            <span class='time' >{{ a.article.create_time|date:'Y-m-d H:i' }}</span>
+                        </div>
+
+                        {% autoescape off %}
+                        <div class="content" >
+                            {{ a.article.content|cutwords_html:250 }}
+                        </div>
+                        {% endautoescape%}
+                        </div>
+                     {% endfor %}
+                </div>
+
+
+              <div class="picture_column" >
+                  <div class="column_item" >
+
+                    <div class="pic" >
+                      <img src="/img/univ/28991922618752718.jpg" width="250" height="300" />
+                    </div>
+                    <div class="txt" >
+
+                    </div>
+
+                    <div class="info" >
+                      <div class="itm tag" >
+                      <a href="/photo/tag/">#摄影</a><a href="/photo/tag/">#色彩</a><a href="#">#静物</a><a href="/photo/tag/">#清新</a>
+                     </div>
+                     <div class="itm time" >
+                      2012-05-12
+                     </div>
+                     <div class="itm hot" >
+                      <a href="javascript:void(0)" >445 <i>♥</i></a>
+                     </div>
+                    </div>
+                  </div>
+
+                   <div class="column_item" >
+                        <div class="pic" >
+                          <img src="/img/univ/1092967334585012667.jpg" width="300" height="250" />
+                        </div>
+                        <div class="txt" >
+
+                        </div>
+
+                        <div class="info" >
+                          <div class="itm tag" >
+                          <a href="/photo/tag/">#摄影</a><a href="/photo/tag/">#色彩</a><a href="#">#静物</a><a href="/photo/tag/">#清新</a>
+                         </div>
+                         <div class="itm time" >
+                          2012-05-12
+                         </div>
+                         <div class="itm hot" >
+                          <a href="javascript:void(0)" >445 <i>♥</i></a>
+                         </div>
+                        </div>
+                  </div>
+
+                    <div class="column_item" >
+                        <div class="pic" >
+                          <img src="/img/univ/2711729925647998688.jpg" width="250" height="300" />
+                        </div>
+                        <div class="txt" >
+                            没有那么多水兵与护士的故事，也没有一辈子守着苏西的迪伦。在这个狭小的十字空间中...
+                        </div>
+
+                        <div class="info" >
+                          <div class="itm tag" >
+                          <a href="/photo/tag/">#摄影</a><a href="/photo/tag/">#色彩</a><a href="#">#静物</a><a href="/photo/tag/">#清新</a>
+                         </div>
+                         <div class="itm time" >
+                          2012-05-12
+                         </div>
+                         <div class="itm hot" >
+                          <a href="javascript:void(0)" >445 <i>♥</i></a>
+                         </div>
+                        </div>
+                  </div>
+
+
+                  <div class="column_item" >
+                        <div class="pic" >
+                          <img src="/img/univ/1566689720389068805.jpg" width="250" height="250" />
+                        </div>
+                        <div class="txt" >
+
+                        </div>
+
+                        <div class="info" >
+                          <div class="itm tag" >
+                          <a href="/photo/tag/">#摄影</a><a href="/photo/tag/">#色彩</a><a href="#">#静物</a><a href="/photo/tag/">#清新</a>
+                         </div>
+                         <div class="itm time" >
+                          2012-05-12
+                         </div>
+                         <div class="itm hot" >
+                          <a href="javascript:void(0)" >445 <i>♥</i></a>
+                         </div>
+                        </div>
+                  </div>
+
+
+
+                  <div class="column_item" >
+                        <div class="pic" >
+                          <img src="/img/univ/1566689720389068805.jpg" width="250" height="250" />
+                        </div>
+                        <div class="txt" >
+
+                        </div>
+
+                        <div class="info" >
+                          <div class="itm tag" >
+                          <a href="/photo/tag/">#摄影</a><a href="/photo/tag/">#色彩</a><a href="#">#静物</a><a href="/photo/tag/">#清新</a>
+                         </div>
+                         <div class="itm time" >
+                          2012-05-12
+                         </div>
+                         <div class="itm hot" >
+                          <a href="javascript:void(0)" >445 <i>♥</i></a>
+                         </div>
+                        </div>
+                  </div>
+
+
+
+                  <div class="column_item" >
+                        <div class="pic" >
+                          <img src="/img/univ/1566689720389068805.jpg" width="250" height="250" />
+                        </div>
+                        <div class="txt" >
+
+                        </div>
+
+                        <div class="info" >
+                          <div class="itm tag" >
+                          <a href="/photo/tag/">#摄影</a><a href="/photo/tag/">#色彩</a><a href="#">#静物</a><a href="/photo/tag/">#清新</a>
+                         </div>
+                         <div class="itm time" >
+                          2012-05-12
+                         </div>
+                         <div class="itm hot" >
+                          <a href="javascript:void(0)" >445 <i>♥</i></a>
+                         </div>
+                        </div>
+                  </div>
+
+                  <div class="column_item" style="border-bottom:none" >
+                        <div class="pic" >
+                          <img src="/img/univ/1331376639858949213.jpg" width="250" height="300" />
+                        </div>
+                        <div class="txt" >
+
+                        </div>
+
+                        <div class="info" >
+                          <div class="itm tag" >
+                          <a href="/photo/tag/">#摄影</a><a href="/photo/tag/">#色彩</a><a href="#">#静物</a><a href="/photo/tag/">#清新</a>
+                         </div>
+                         <div class="itm time" >
+                          2012-05-12
+                         </div>
+                         <div class="itm hot" >
+                          <a href="javascript:void(0)" >445 <i>♥</i></a>
+                         </div>
+                        </div>
+                  </div>
+
+                   <div class="column_item" style="border-bottom:none" >
+                        <div class="pic" >
+                          <img src="/img/univ/1014435816082709469.jpg" width="300" height="300" />
+                        </div>
+                        <div class="txt" >
+
+                        </div>
+
+                        <div class="info" >
+                          <div class="itm tag" >
+                          <a href="/photo/tag/">#摄影</a><a href="/photo/tag/">#色彩</a><a href="#">#静物</a><a href="/photo/tag/">#清新</a>
+                         </div>
+                         <div class="itm time" >
+                          2012-05-12
+                         </div>
+                         <div class="itm hot" >
+                          <a href="javascript:void(0)" >445 <i>♥</i></a>
+                         </div>
+                        </div>
+                  </div>
+                  <!--end pic column-->
+              </div>
+               <!--end main-->
+            </div>
+            <!--end main_wrap-->
+        </div>
+
+        <script src="{{ STATIC_URL }}js/jquery-1.6.4.js" type="text/javascript" ></script>
+        <script src="{{ STATIC_URL }}js/gl.js" type="text/javascript" ></script>
+    </body>
+    </html>
+
+
+
+   <div class="page" >
+        {% if page.prev_page_number%}
+       <a href="/read/?page={{ page.prev_page_number }}" class="prev"> <<-上一页</a>
+       {% endif %}
+        
+       {% if page.has_next   %}
+           <a href="/read/?page={{ page.next_page_number }}" class="next" >下一页->></a>
+       {% endif %}
+    </div>
+                          
+
+ 

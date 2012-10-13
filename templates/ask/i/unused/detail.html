@@ -1,0 +1,307 @@
+{% extends 'ask/i/base.html' %}
+
+ {% block title %}
+          <title>{{ q.q.question }}</title>
+  {% endblock %}
+
+{% block style %}
+
+ {% include 'ask/i/ask_style.html' %}
+<link rel="stylesheet" href="/medias/js/ueditor/themes/default/ueditor.css"/>
+<style type="text/css">
+
+     .edui-editor{
+        width:690px;
+
+     }
+
+     a.cancel{
+        text-align:right;padding:5px 3px;margin-right:30px;text-decoration:none;color:#4151F5
+     }
+
+     a.cancel:hover{
+       text-decoration:Underline;
+     }
+
+</style>
+
+{% endblock %}
+
+{% block script %}
+
+   {% include 'ask/i/ask_script.html' %}
+   <script type="text/javascript" src="/medias/js/ueditor/editor_config.js"></script>
+   <script type="text/javascript" src="/medias/js/ueditor/editor_all.js"></script>
+   <script type="text/javascript" src="/medias/js/ask.js" ></script>
+   <script type="text/javascript" src="/medias/js/answer.js" ></script>
+  
+  <script type="text/javascript">
+
+
+   var editor;
+   var q_id={{ q.q.id }}
+   var user_answer_state=null;
+
+   $(document).ready(function(){
+    editor = new baidu.editor.ui.Editor({ 
+        toolbars:[[
+                'Bold', 'Italic', 'Underline','JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyJustify','Horizontal','Link', 'Unlink','InsertOrderedList', 'InsertUnorderedList']],
+        autoFloatEnabled:true,
+        textarea : 'editorValue',
+        initialStyle: 'body{font-size: 14px; font-family:Arial,Helvetica,sans-serif;font-weight:normal;color:#333333 !important;}',
+        autoHeightEnabled:true,
+        minFrameHeight:100,
+        wordCount:false
+    });
+    {% if user_answer %}
+      user_answer_state={{ user_answer.id }}
+    {% else %}
+
+      editor.render("answer");
+
+    {% endif %}
+
+});
+
+
+  
+  </script>
+
+{% endblock %}
+
+
+{% block ihome %}
+
+<div class="current_location" >
+  {% ifequal current_user.id user.id %}
+    <h3><a class="cl" href="/ask">问答</a></h3><span>>></span><a class="cn" href="{{ user_url }}/ask">我的问题</a> <a href="/ask/create" class="cr" >我要提问</a>
+  {% else %}
+    <h3><a class="cl" href="/ask">问答</a></h3><span>>></span><a class="cn" href="{{ current_user_url }}/ask">{{ current_user.nickname }}的问题</a>
+    <a href="/ask/create" class="cr" >向TA提问</a>
+  {% endifequal %}
+
+</div>
+
+{% endblock %}
+
+{% block menu %}
+
+{% endblock %}
+
+{% block content %}
+
+                <div class="ask" style="" >
+                    <div class="question" style="" >
+                        <h2 style="font-size: 16px;font-weight: 700;color:#222" >{{ q.q.question }}</h2>
+                         <div class="q_tg" >
+                          {% if tags %}
+                              标签:<span>
+                                      {% for t in tags %}
+
+                                       <a href="/ask/tag/{{ t.id }}/{{ t.tag }}">{{ t.tag }}</a>
+
+                                      {% endfor %}
+                                    </span>
+                          {% endif %}
+
+                          {% if subjects %}
+
+                             主题:<span>
+                                   {% for s in subjects %}
+                                       <a href="/ask/subject/{{ s.id }}/{{ s.subject }}">{{ s.subject }}</a>
+                                    {% endfor %}
+                               </span>
+
+                          {% endif %}
+                        </div>
+                        <div style="color:#333" >
+                          {% if q.q.question_more %}
+                             {{ q.q.question_more }}
+                          {% else %}
+
+                          {% endif %}
+                         
+                        </div>
+                        <div class="q_edit" >
+                           {% ifequal q.q.user_id user.id %}
+                                <span class="fl" >
+      
+                                  {% if q.q.close_state %}
+                                    <a  ref='open' onclick="close_question(this,{{ q.q.id }})" href="javascript:void(0)">打开问题</a>
+                                  {% else %}
+                                    <a ref='close' onclick='close_question(this,{{ q.q.id }})' href="javascript:void(0)">关闭问题</a>
+                                  {% endif %}
+                                  <a  href="/question/{{ q.q.id }}/edit">修改</a>
+                              </span>
+                          {% endifequal %} 
+
+                          <span class="fr" >
+                            {% if q.q.anonymity %}
+
+                            {% else %}
+                              <a href="#">{{ q.user.nickname }}</a> 
+                            {% endif %}
+                            {{ q.q.create_time|date:'Y-m-d H:i' }}
+                          </span>
+                           
+                            <span style="color:#666;font-size:12px" ></span>
+                        </div> 
+                    </div>
+
+                    {% autoescape off %}
+                      {% for a in answers %}
+                        <div class="answer">
+                          <a name="{{ a.answer.id }}"></a>
+                           <div class="answer_dig" >
+                              {% ifequal a.dig_status 1 %}
+                                 <a class='dig_up highlight_dig_a'  href="javascript:void(0)" title='赞成' >
+                                      <span></span>
+                                  </a>
+                                 <a class='dig_down' href="javascript:void(0)" title='反对' >
+                                      <span></span>
+                                </a>
+                              {% endifequal %}
+
+                              {% ifequal a.dig_status -1 %}
+                                  <a class='dig_up '  href="javascript:void(0)" title='赞成' >
+                                      <span></span>
+                                  </a>
+                                   <a class='dig_down highlight_dig_a' href="javascript:void(0)" title='反对' >
+                                      <span></span>
+                                  </a>
+                              {% endifequal %}
+
+
+                              {% if not a.dig_status %}
+                                <a class='dig_up'  href="javascript:void(0)" title='赞成' >
+                                    <span></span>
+                                </a>
+                                <a class='dig_down' href="javascript:void(0)" title='反对' >
+                                      <span></span>
+                                </a>
+                              {% endif %}
+                          </div>
+                          <input type='hidden' value='{{ a.answer.id }}' />
+                          <h3>
+                              <a href="#">
+                                <img src="/medias/image/{{ a.user.head }}" height='24' width='24'></a>
+                              <span>
+                                <a href="#">{{ a.user.nickname }}</a>
+                              </span>
+                          </h3>
+                          <div class='answer_diggers' >
+                            <span style="margin-right:10px" >{{ a.agree_count }}赞成 / {{ a.oppose_count }}反对</span>
+                            
+                            {% if a.dig_user %}
+
+                              {% for id,nickname,url in a.dig_user %}
+
+                                {% if forloop.counter <= 4 %}
+
+                                   {% if forloop.last %}
+
+                                     {% ifequal forloop.counter 4 %}
+                                          <a href="javascript:void(0)" class='expand_diggers' >更多...</a>
+                                          <span class='hide' >
+                                            <a href="/people/{{url}}">{{ nickname }}</a>
+                                          <span>
+                                      {% else %}
+                                          <a href="/people/{{url}}">{{ nickname }}</a>
+                                      {% endifequal %}
+                                       
+                                   {% else %}
+
+                                      {% ifequal forloop.counter 4 %}
+                                          <a href="javascript:void(0)" class='expand_diggers' >更多...</a>
+                                          <span class='hide' >
+                                            <a href="/people/{{url}}">{{ nickname }}</a><span> 、</span>
+                                      {% else %}
+                                          <a href="/people/{{url}}">{{ nickname }}</a><span> 、</span>
+                                      {% endifequal %}
+
+                                   {% endif %}
+
+                                 
+
+                                {% else %}
+                                  {% if forloop.last %}
+                                      <a href="/people/{{url}}">{{ nickname }}</a>
+                                   </span>
+                                  {% else %}
+                                     <a href="/people/{{url}}">{{ nickname }}</a><span> 、</span>
+                                  {% endif %}
+                                  
+                                {% endif %}
+
+                              {% endfor %}
+
+                            {% endif %}
+                          </div>
+                          <div class='answer_content' style="margin-top: 5px;color:#111;line-height: 22px;" >
+                              {{ a.answer.answer }}
+                          </div>
+
+                          <div class="answer_action">
+                              <a href="javascript:void(0)">评论</a>
+                              <a href="javascript:void(0)" class='editanswer'  >没有帮助</a>
+                              {% ifequal a.user.id user.id %}
+                                  <a onclick='editanswer(this)' class='editanswer' href="javascript:void(0)">修改</a>
+                                  <a onclick='' class='editanswer' href="javascript:void(0)">删除</a>
+                               {%else%}
+
+                              {% endifequal %}
+                              <span style='float:right;padding-top:2px' >{{ a.answer.create_time|date:'Y-m-d H:i'  }}</span> 
+
+                          </div>
+                        </div>
+                      {% endfor %}
+
+                    <!-- 回答过问题，但问题没有关闭 -->
+                    {% if user_answer %}
+
+                      {% if q.q.close_state %}
+                        <div class='answered_tip close' >问题已经关闭</div>
+                      {% else %}
+                         <div class='answered_tip' >你已经回答过这个问题了,如果想继续回答，请修改你的答案</div>
+                      {% endif %}
+
+                    {% else %}
+                            {% if q.q.close_state %}
+                               <div class='answered_tip' >问题已经关闭</div>
+                               <form class='answer_form hide'  name='answer_form' action='' method='post' >
+                                <div class="answer" style="padding-top:30px;position:relative;border-bottom:none" >
+                                     <div class='loading' >
+                                        <img src="/medias/image/ajax-loader.gif" width='22' height='22' >
+                                        <span>
+                                            正在加载,请稍后...
+                                        </span>
+                                    </div>
+                                    <textarea id='answer' name='answer' ></textarea><br>
+                                    <input type='hidden' name='q_id' value="{{ q.q.id }}" />
+                                    <input type="button" class="action" value="提交答案" />
+                                </div>
+                              </form>
+                          {% else %}
+                             <form class='answer_form'  name='answer_form' action='' method='post' >
+                                <div class="answer" style="padding-top:30px;position:relative;border-bottom:none" >
+                                     <div class='loading' >
+                                        <img src="/medias/image/ajax-loader.gif" width='22' height='22' >
+                                        <span>
+                                            正在加载,请稍后...
+                                        </span>
+                                    </div>
+                                    <textarea id='answer' name='answer' ></textarea><br>
+                                    <input type='hidden' name='q_id' value="{{ q.q.id }}" />
+                                    <input type="button" class="action" value="提交答案" />
+                                </div>
+                            </form>
+                          {% endif %}
+                    {% endif %}
+                    
+                    {% endautoescape %}
+
+                </div>
+
+              
+{% endblock %}
+

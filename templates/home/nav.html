@@ -1,0 +1,50 @@
+
+            <div id="nav" >
+                <div id="nav_items" >
+                    <ul>
+                        <li>
+                            <a href="/home/" class="{{ first_current_nav }}" >首页</a>
+                            <span></span>
+                        </li>
+
+                         <li>
+                            <a href="/read/" class="{{ read_current_nav }}" >阅读</a>
+                        </li>
+                        <li>
+                            <a href="/explore/" class="" >发现</a>
+                        </li>
+                       
+                        <li>
+                            <a href="/topic/" class="{{ topic_current_nav }}" >话题</a>
+                        </li>
+                        <li>
+                            <a href="/ask/" class="{{ ask_current_nav }}" >问答</a>
+                        </li>
+                        <li>
+                            <a href="/i/college/" class="{{ college_current_nav }}" >我的大学</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div id="nav_info" >
+                    <ul class="user_info" >
+                        <li>
+                            <a class="nav_user_alink" href="#" >
+                                {% if user %}
+                                 {{ user.nickname }}
+                                {% endif %}
+                                <span></span>
+                            </a>
+                            <ul>
+                                <li><a class="sprite-user" href="{{ user_url }}" >个人主页</a></li>
+                                <li><a class="sprite-mail" href="/inbox/" >私信</a></li>                   
+                                <li><a class="sprite-wrench" href="/setting/" >设置</a></li>
+                                <li><a class="sprite-on-off" href="/accounts/logout/" >退出</a></li>
+                            </ul>
+                        </li>
+                        <li class="notice" >
+                            <a href="#" >通知</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>

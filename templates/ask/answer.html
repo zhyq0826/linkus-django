@@ -1,0 +1,39 @@
+
+{% extends 'home/base.html' %}
+{% load filter_tool %}
+
+
+
+{% block menu %}                   
+   
+{% endblock %}
+
+
+{% block content %}
+
+{% autoescape off %}
+
+                    <div class="cuai" >
+                        <h3>{{ current_user.nickname }}的回答</h3>
+                    </div> 
+
+                 <div class="ask" >
+                        {% for q_id,user_id,question,a_id,answer,create_time in answered_questions %}
+
+                            <div class="question" >   
+                                <h2><a href="/question/{{ q_id }}#{{ a_id }}" >{{ question }}</a></h2>
+                                <span class="ianswer" >TA的回答:</span>
+                                <div class="ianswer" style="margin-top: 5px;color:#111;line-height: 22px;" >
+                                     {{ answer|cutwords:40}}
+                                </div>
+                                <div class="ianswertime" >
+                                    <span>{{ create_time|date:'Y-m-d H:i' }}</span>
+                                </div>
+                            </div>
+                        {% endfor %}
+                </div>
+{% endautoescape %}
+                
+
+{% endblock %}
+

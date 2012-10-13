@@ -1,0 +1,147 @@
+{% extends 'public/base.html' %}
+{% load filter_tool %}
+
+
+{% block style %}
+
+  <link href="{{ STATIC_URL }}css/ask.css?{% now "U" %}" rel="stylesheet" type="text/css" media="screen" />
+
+
+{% endblock %}
+
+
+{% block content %}
+
+{% include 'public/ask_nav.html' %} 
+
+  <div class="fl" style="" >
+  	   <div class="ask" style="font-size:12px" >
+          {% for q in questions %}
+               <div class="question" >
+                  <div style="" >
+                    {% if q.q.anonymity %}
+
+                    {% else %}
+
+                        {% if q.u.url %}
+                           <a class="uh"  href="/people/{{ q.u.url }}">
+                          <img title="{{ q.u.nickname }}" src="{{ avatar_url }}{{ q.u.head }}">
+                        </a>
+                        {% else %}
+
+                         <a class="uh"  href="/people/{{ q.u.id }}">
+                          <img title="{{ q.u.nickname }}" src="{{ avatar_url }}{{ q.u.head }}">
+                        </a>
+
+                        {% endif %}
+
+                     {% endif %}
+                   
+                    <h2><a href="/question/{{ q.q.id }}" >{{ q.q.question }}</a><a href=""></a></h2>
+                  </div>
+                  
+                  <div class="q_state" >
+                        <h3>
+                           {% if q.t %}
+                           <span>
+                               标签:
+                               {% for s in q.t %}
+                                  <a href="#" >{{ s.tag }}</a>
+                               {% endfor %}
+                            </span>
+                           {% endif %}
+                            {% if q.s %}
+                           <span>
+                               主题:
+                               {% for s in q.s %}
+                                  <a href="/ask/subject/{{ s.id }}/{{ s.subject }}" >{{ s.subject }}</a>
+                               {% endfor %}
+                            </span>
+                           {% endif %}
+                      </h3>
+                      <span>{{ q.q.answer_count }}个答案</span>
+                      <span style="margin-left: 15px;float:right;padding-top:2px" >{{ q.q.create_time|date:'Y-m-d  H:i' }}</span>
+                  </div>
+              </div>
+          {% endfor %}
+      </div>
+  </div>
+
+  <div class="fr" >
+    <!--user_ask_state-->
+     <div class="uas" >
+       <h3>我在univspot的问答</h3>
+       <a href="javascript:;">我的收藏</a>
+       <a href="javascript:;">我回答的问题</a>
+       <a href="javascript:;">请我回答的问题</a>
+     </div>
+     <!--ask_catalog-->
+     <div class="ac" >
+      <h3>univspot 问答分类<span class="up" ></span><span class="down" ></span></h3>
+        {% for s in subjects %}
+          <a  id="{{ s.id }}" href="/ask/subject/{{ s.id }}/{{ s.subject }}">{{ s.subject }}({{ s.question_count }})</a>
+        {% endfor %}
+     </div>
+     <!--user may insterest-->
+     <div class="umi" >
+      <h3>univspot 问答热门用户</h3>
+      <div>
+        <a class="ua" href="">
+           <img src="/img/avatar/Xvd2012519124110WTpthumb.jpg">
+        </a>
+       
+        <a class="u" href="">灿烂</a>
+        <p>姐陪你走过了千山万水，你还说姐不够意思，下辈子诅咒你成猪八戒</p>
+      </div>
+      <div>
+          <a class="ua" href="javascript:;">
+            <img src="/img/avatar/e26b07b95_s.jpg">
+          </a>
+        <a class="u" href="">Jone</a>
+        <p>从笑到笑</p>
+      </div>
+      <div>
+          <a  class="ua" href="javascript:;">
+            <img src="/img/avatar/9ab6eb141_s.jpg">
+          </a>
+        <a class="u" href="">Mary</a>
+        <p>移动互联网创业合作</p>
+      </div>
+      <div>
+          <a class="ua" href="javascript:;">
+            <img src="/img/avatar/e65ed8826_s.jpg">
+          </a>
+          <a class="u" href="">Suo</a>
+          <p>从知道到不知到，原来都一样哦</p>
+     </div>
+
+     <div>
+          <a class="ua" href="javascript:;">
+            <img src="/img/avatar/e65ed8826_s.jpg">
+          </a>
+          <a class="u" href="">Suo</a>
+          <p>从知道到不知到，原来都一样哦</p>
+     </div>
+
+       <div>
+          <a class="ua" href="javascript:;">
+            <img src="/img/avatar/f7675a265_s.jpg">
+          </a>
+          <a class="u" href="">Suo</a>
+          <p>从知道到不知到，原来都一样哦</p>
+     </div>
+  </div>
+
+
+
+  <div class="page" >
+      {% if page.prev_page_number%}
+     <a href="/ask/?page={{ page.prev_page_number }}" class="prev"> <<-上一页</a>
+     {% endif %}
+      
+     {% if page.has_next   %}
+         <a href="/ask/?page={{ page.next_page_number }}" class="next" >下一页->></a>
+     {% endif %}
+  </div>
+
+{% endblock %}

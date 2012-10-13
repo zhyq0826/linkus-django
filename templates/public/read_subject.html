@@ -1,0 +1,88 @@
+{% extends 'public/base.html' %}
+{% load filter_tool %}
+
+
+{% block style %}
+ <link href="{{ STATIC_URL }}css/blog.css?{% now "U" %}" rel="stylesheet" type="text/css" media="screen" />
+ 
+ <style type="text/css">
+
+ </style>
+
+{% endblock %}
+
+
+{% block content %}
+
+              
+
+<div class="current_sub" >
+    <!-- <img src="/img/univ/432a19b6c_l.jpg"> -->
+    <div class="infol" >
+      <h3>{{ one.subject }}</h3>
+      <p>
+       {{ one.brief }}
+      </p>
+    </div>
+    <div class="infor" >
+      <span>23054个同学关注•</span>
+      <span>2305篇文章•</span>
+      <span>230544条评论</span>
+    </div>
+</div>
+
+  <div class="fl" >
+  	<div class="blog" style="font-size:12px" >
+        <div class="list" >
+            <ul>
+                {% for a in articles %}
+                    <li class="item" style="padding-bottom:0px" >
+                      <div class="title" >
+                        <h3><a href="/blog/{{ a.article.id }}?subject={{ one.id }}" >{{ a.article.title }}</a></h3>
+                    </div> 
+                       <div class="au" >
+                          {% if a.author.url %}
+                              <a href="/people/{{ a.author.url }}">{{ a.author.nickname }}</a>
+                            {% else %}
+                              <a href="/people/{{ a.author.id }}">{{ a.author.nickname }}</a>
+                            {% endif %}
+                            <span class='time' >{{ a.article.create_time|date:'Y-m-d H:i' }}</span>
+                        </div>
+                    
+              
+                    {% autoescape off %}
+                    <div class="content" >
+                        {{ a.article.content|cutwords_html:250 }}
+                    </div>
+                    <div style="text-align:right !important" >
+                       <a class="viewall" style="font-size:12px;diplay:inline-block;margin-bottom:5px;" href="/blog/{{ a.article.id }}">查看全文</a>
+                    </div>
+
+                    {% endautoescape%}
+                </li> 
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+  
+  </div>
+
+  <div class="fr" >
+
+    <div class="sub_related_tag" >
+      <h3>热门标签</h3>
+      <ul>
+        <li><a class="first" href="/article/12/">#豆瓣</a><span>+</span></li>
+        <li><a href="/article/12/">#果壳</a><span >+</span></li>
+        <li><a href="/article/12/">#过客</a><span>+</span></li>
+        <li><a href="/article/12/">#韩寒</a><span>+</span></li>
+        <li><a href="/article/12/">#马英九</a><span>+</span></li>
+        <li><a href="/article/12/">#云南美食</a><span>+</span></li>
+        <li><a class="last" href="/article/12/">#那些年追过的女孩</a><span>+</span></li>
+      </ul>
+    </div>
+  </div>
+
+  </div>
+
+{% endblock %}

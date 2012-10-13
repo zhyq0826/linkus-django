@@ -1,0 +1,42 @@
+
+{% extends 'ask/i/base.html' %}
+
+
+{% block menu %}
+
+
+
+{% endblock %}
+
+
+{% block content %}
+              <div class="cuai" >
+                    <h3>{{ current_user.nickname }}的提问</h3>
+              </div>
+
+			    <div class="ask" >
+                    {% for q in questions %}
+                         <div class="question" >
+                            <h2><a href="{{ current_user_url }}/question/{{ q.id }}" >{{ q.question }}</a></h2>
+                            <div class="more" >
+                                <span>{{ q.answer_count }}个回答</span>
+                                
+                                {% ifequal q.anonymity 1 %}
+                             <span style="margin-left: 15px;" >匿名</span>
+                                {% endifequal %}
+                                <span style="margin-left: 15px;float:right;padding-top:2px" >{{ q.create_time|date:'Y-m-d  H:i' }}</span>
+                            </div>
+                        </div>
+                    {% endfor %}
+
+
+                </div>
+
+               
+
+
+
+            
+            
+{% endblock %}
+

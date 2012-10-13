@@ -1,0 +1,24 @@
+#/etc/apache2/sites-available/univspot
+
+<VirtualHost *:80>  
+   
+    
+
+    ServerName www.univspot.com   
+    ServerAlias univspot.com
+
+    DocumentRoot /var/www/linkusall 
+
+   
+    <Directory /var/www/linkusall>  
+        Order allow,deny  
+        Allow from all  
+    </Directory>  
+
+    WSGIDaemonProcess univspot.com processes=2 threads=25 display-name=%{GROUP}
+    WSGIProcessGroup univspot.com
+
+   
+    WSGIScriptAlias / /var/www/linkusall/apache/django.wsgi  
+   
+</VirtualHost>

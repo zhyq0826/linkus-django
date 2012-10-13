@@ -1,0 +1,78 @@
+
+{% extends 'topic/i/base.html' %}
+
+{% block selfstyle %}
+ <link rel="stylesheet" href="{{ STATIC_URL }}js/ueditor/themes/default/ueditor.css"/>
+ <link rel="stylesheet" href="{{ STATIC_URL }}css/complete.css"/>
+    <style type='text/css'>
+
+     .error{
+        line-height:18px;
+        height:28px;
+        color: #d21a00;
+        padding:10px 0px;
+        padding-left:15px;
+        float: left;
+     }
+
+     .edui-editor{
+        width:510px;
+     }
+
+    </style>
+{% endblock %}
+
+
+
+
+{% block ihome %}
+
+<div class="current_location" >
+  <h3><a  href="/topic" class="cl" >话题</a></h3><span>>></span><span>创建新话题</span><a href="{{ user_url }}/topic" class="cr" >我的话题</a>
+</div>
+
+{% endblock %}
+
+
+{% block menu %}
+
+{% endblock %}
+
+{% block content %}
+
+            <form action="/topic/create" method="post">
+                <div class="topic" style="float:left" >
+                    <div class="newtopic" >
+                    
+                        <label>在此输入新的话题:</label>
+                        {{ form.topic }}
+                         <label>关于此话题的补充(可不填):</label>
+                        {{ form.more }}
+                        <input type="submit" style="margin-right: 20px;" class="action"  value="发布话题" />
+                        <a class='cancel' href="/topic">取消</a>
+                       
+                    </div>
+                </div>
+                 <div class="wrap_subject" style="float:left" >
+                  <div class="sj">
+                    <h3>选择主题：</h3>
+                    <ul>
+                      {% for s in subjects %}
+
+                        <li><a class="subject" id="{{ s.id }}" href="javascript:void(0)">{{ s.subject }}</a></li>
+
+                      {% endfor %}
+                      
+                    </ul>
+                  </div>
+                  <div class="tg" >
+                      <label for="tag" class="sl" >选择标签:</label>
+                      <input type="text" id="tag" name="tagtext" autocomplete="off" class="text"  >
+                  </div>
+                </div>
+               </form>
+{% endblock %}
+
+{% block selfscript %}
+<script type="text/javascript" src="{{ STATIC_URL }}js/complete.js"></script>
+{% endblock %}

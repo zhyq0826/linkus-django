@@ -1,0 +1,57 @@
+
+{% extends 'topic/i/base.html' %}
+
+{% block selfstyle %}
+
+    <style type='text/css'>
+
+     .error{
+        line-height:18px;
+        height:28px;
+        color: #d21a00;
+        padding:10px 0px;
+        padding-left:15px;
+        float: left;
+     }
+
+    </style>
+{% endblock %}
+
+
+{% block menu %}                   
+{% include 'topic/i/topic_menu.html' %}
+{% endblock %}
+
+
+
+{% block content %}
+
+                <div class="topic" >
+                    <ul class="wrap_topic_ul" >
+                        <li>
+                            <h3><a href="/i/topic/1/" >韩少和方舟子对战你怎么看</a></h3>
+                            <div class="response" >
+                                <span class="topic_reply slidedown" ><a href="javascript:void(0)">回应</a></span>
+                                <span class="topic_time" >2011-10-10 11:45</span>
+                            </div>
+                            <div class="comment topic_comment1 topic_comment2" style="display: none" >
+                                {% include 'topic/topic_comment.html' %}
+                                <span class="topic_reply slideup" style="position: absolute;bottom: 10px;right: 10px;font-size: 12px;" ><a href="javascript:void(0)">收起</a></span>
+                            </div>
+                        </li>
+                         <li>
+                            <h3><a href="/i/topic/1/" >韩少和方舟子对战你怎么看</a></h3>
+                            <div class="response" >
+                                <span class="topic_reply slidedown" ><a href="javascript:void(0)">回应</a></span>
+                                <span class="topic_time" >2011-10-10 11:45</span>
+                            </div>
+                            <div class="comment topic_comment1 topic_comment2" style="display: none" >
+                               {% include 'topic/topic_comment.html' %}
+                                <span class="topic_reply slideup" style="position: absolute;bottom: 10px;right: 10px;font-size: 12px;" ><a href="javascript:void(0)">收起</a></span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+			   
+{% endblock %}
+

@@ -1,0 +1,59 @@
+ <div class="comment" >
+        <ul>
+             <div class='loadingchange' >
+                    <img src="/static/image/ajax-loader.gif" width='22' height='22' >
+                    <span>
+                        正在加载,请稍后...
+                    </span>
+            </div>
+
+             <form name='commentform{{ topic_id }}' >
+                <li id='commentform{{ topic_id }}' style="border:none;margin-bottom:10px;padding:0px" >
+                    <textarea name='content' ></textarea>
+                    <input type="hidden" name="to_user_id" value='' />
+                    <input type="hidden" name="topic_id" value="{{ topic_id }}" >
+                </li>
+                <input type="button" onclick="submitComment('commentform{{ topic_id }}')" class="action"  value="回应" />
+                <div style='height:15px;clear:borth' ></div>
+            </form>
+            
+            {% for c in comments %}
+                <li>
+                    
+                    <a class="head" >
+                        <img src="{{ avatar_url }}{{ c.user.head }}"  />
+                    </a>
+
+                    {% if value.to_user %}
+                        <label>RT <a href="javascript:void(0)">{{ c.to_user.nickname }}:</a></label>
+                    {% endif %}
+
+
+                    <table  style="table-layout:fixed">
+                                <tbody>
+                                <td style="word-wrap : break-word; overflow:hidden; " >
+                               <prev>
+                                    {{ c.content }}
+                                </prev>
+                              </td>
+                              </tbody>
+                    </table>
+
+
+                    <div>
+                        <span class="comment_time" >{{ c.create_time|date:'Y-m-d H:i' }}</span>
+                        <span class="comment_user" >
+                            <a href="#" class="replied" >{{ c.user.nickname }}</a>
+                            <a  href="javascript:void(0)" class="reply" ></a>
+                            <input type="hidden" name="user_id"  value="{{ c.user.id }}" />
+                            <input type="hidden" name="id"  value="commentform{{ topic_id }}" />
+                        </span>
+                    </div>
+
+                    
+                </li>
+            {% endfor %}
+        </ul>
+</div>
+
+        

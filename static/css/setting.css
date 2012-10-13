@@ -1,0 +1,470 @@
+/* 
+    Document   : setting
+    Created on : 2012-3-8, 14:42:23
+    Author     : zhyq
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/*----------- -----------设置-----------------------------------*/
+.setting{
+    position: relative;
+    margin-top:30px;
+    text-align: left;
+    height: 100%;/* 为了防止IE把高度撑开 */
+    clear: both;
+    padding-top: 20px;
+}
+
+.setting h3{
+    text-align: left;
+    color: #333333;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    margin-bottom: 25px;
+}
+
+.setting p{
+    float: left;
+    clear: both;
+    margin-top:10px;
+    margin-bottom:10px;
+    width:100%;
+}
+
+
+.setting p.tip{
+   float: none;
+   border:1px dashed #ccc;
+   color: #d21a00;
+   text-align:center;
+   padding:10px 0px;
+   font-size:16px;
+}
+
+.setting div{
+    float: left;
+    margin-top:10px;
+    margin-bottom:5px;
+}
+
+.setting label{
+    display: inline-block;
+    width: 80px;
+    line-height:18px;
+    text-align: left;
+    float: left;
+    padding: 6px 3px;
+}
+
+.setting ul{
+    clear: both;
+
+    list-style-type: none;
+    display: none;
+    text-align: center;
+    margin-left: 86px;
+    margin-bottom:0;
+    width: 228px;
+    border:1px solid #8CA4B7;
+    border-top:none;
+   max-height: 100px;
+    overflow: auto;
+    outline: none;
+    -moz-box-shadow: 0 0px 3px rgba(180, 180, 180, 0.4);
+    -webkit-box-shadow: 0 0px 3px rgba(180, 180, 180, 0.4);
+    box-shadow: 0 0px 3px rgba(180, 180, 180, 0.3);
+}   
+
+.setting li{
+    color:#0F13EC;
+    height: 25px;
+    text-align: center;
+    line-height: 25px;
+    display: block;
+}
+
+#province_options{
+    display: none;
+    max-height:100px
+}
+
+#city_options{
+    display: none;
+    max-height:100px
+}
+
+
+#area_options{
+    display: none;
+    max-height:100px
+}
+
+.setting li.current_li{
+    background-color:#ebebeb;
+    cursor: default;
+}
+/*固定按钮的位置 当设置了绝对定位 四个方向都设置的值为auto 该元素的位置与它原先的排列顺序一致 */
+
+.setting textarea{
+
+    outline-width:0;
+    text-align: left;
+    display: inline-block;
+    width: 560px;
+    height: 100px;
+    resize:none;
+    padding: 0px 0px 0px 10px;
+    outline: none;
+    overflow-y:auto;
+    overflow-x:hidden;
+    background: none repeat scroll 0 0 padding-box #ffffff;
+    border: 1px solid #8CA4B7;
+    border-radius: 3px 3px 3px 3px;
+    -moz-box-shadow: 0 0px 3px  rgba(140, 164, 183, 0.4);
+    -webkit-box-shadow: 0 0px 3px  rgba(140, 164, 183, 0.4);
+    box-shadow: 0 0px 3px rgba(140, 164, 183, 0.4);
+    color: #333;
+    cursor: text;
+    font-size: 14px;
+    line-height: 18px;
+    margin: 0 0 18px;
+    padding: 10px 5px;
+}
+
+.setting .text{
+    background: none repeat scroll 0 0 padding-box #ffffff;
+    border: 1px solid #8CA4B7;
+    border-radius: 3px 3px 3px 3px;
+    -moz-box-shadow: 0 0px 3px  rgba(140, 164, 183, 0.4);
+    -webkit-box-shadow: 0 0px 3px  rgba(140, 164, 183, 0.4);
+    box-shadow: 0 0px 3px rgba(140, 164, 183, 0.4); 
+    color: #333;
+    cursor: text;
+    display: inline-block;
+    font-size: 14px;
+    line-height: 18px;
+    margin: 0 0 18px;
+    padding: 8px 4px;
+    width: 220px;
+    text-align:center;
+}
+
+#username,#nickname,#blog,#url{
+
+   background: none repeat scroll 0 0 padding-box #ffffff;
+    border: 1px solid #8CA4B7;
+    border-radius: 3px 3px 3px 3px;
+    -moz-box-shadow: 0 0px 3px  rgba(140, 164, 183, 0.4);
+    -webkit-box-shadow: 0 0px 3px  rgba(140, 164, 183, 0.4);
+    box-shadow: 0 0px 3px rgba(140, 164, 183, 0.4);
+    
+    color: #333;
+    cursor: text;
+    display: inline-block;
+    font-size: 14px;
+    line-height: 18px;
+    margin: 0 0 18px;
+    padding: 8px 4px;
+    width: 220px;
+    text-align:center;
+}
+
+#url{
+    width:80px;
+}
+
+#blog{
+    text-align: left;
+}
+
+.setting .department{
+    height:100px;
+}
+
+.setting .school_start_year{
+    height:100px;
+}
+
+.setting .school_end_year{
+    height:100px;
+}
+
+.setting .profession{
+    height:100px;
+}
+
+.setting .virtual_select{
+
+    background: none repeat scroll 0 0 padding-box #ffffff;
+    border: 1px solid #8CA4B7;
+    border-radius: 3px 3px 3px 3px;
+    -moz-box-shadow: 0 0px 3px  rgba(140, 164, 183, 0.4);
+    -webkit-box-shadow: 0 0px 3px  rgba(140, 164, 183, 0.4);
+    box-shadow: 0 0px 3px rgba(140, 164, 183, 0.4);
+    background:url("../image/univspot_button.png") right center no-repeat;
+    background-position: 200px -50px;
+    color: #333;
+    cursor: text;
+    display: inline-block;
+    font-size: 14px;
+    line-height: 18px;
+    margin: 0;
+    padding: 8px 4px;
+    width: 220px;
+    float: left;
+    text-align:center;
+    text-decoration: none;
+}
+
+.setting div.home{
+    height:150px !important;
+    float: left;
+    clear: both;
+    width: 100%;/* IE 下面设置为百分百之后才会把父元素撑开 */
+}
+
+.setting div.home .first{
+    float: left;
+}
+
+.setting div.home .second{
+    margin-left: 30px;
+    float: left;
+}
+
+#area_options,#school_options,#city_options,#end_year_options{
+    margin-left: 0px !important;
+    max-height:100px !important;
+}
+
+#start_year_options{
+    max-height:100px !important;
+    display: none;
+}
+
+
+/*院校的弹出样式*/
+ .jqmWindow {
+    display: none;
+}
+
+div.box_content{
+    float: left;
+    height:auto;
+    width:auto;
+    background-color: #fff;
+}
+
+div.school_content{
+    width: 600px;
+    height: 485px;
+    float: left;
+}
+
+div.school_content a{
+    display: inline-block;
+    text-align: center;
+    width: auto;
+    text-decoration: none;
+    line-height:20px;
+    letter-spacing: 1px;
+    font-size: 14px;
+}
+
+div.school_content   h3{
+    clear: both;
+    color: #333333;
+    font-size: 18px;
+    padding: 8px 3px 2px 3px;
+    text-align: left;
+    font-weight: normal;
+    display: block;
+}
+
+.box_content .province{
+    float: left;
+    height: 120px;
+    width: 100%;
+}
+
+
+.box_content .province ul{
+    padding: 0px;
+    margin: 0px;
+    height: 118px;
+    margin-left: 2%;
+    width: 95%;
+    list-style: none;
+    float: left;
+    border: 1px solid #CCCCCC;
+    overflow-y: auto;
+}
+
+.box_content .province li{
+    height: 23px;
+    float: left;
+    width: 45px;
+    margin: 0px;
+    padding: 0px;
+    margin-left: 8px;
+    width:60px;
+}
+
+.box_content .province a{
+    color: #4488aa;
+    padding: 0px;
+    margin: 0px;
+}
+
+.box_content .province a:hover{
+    color: #fff;
+    background: #F85050;
+}
+
+.box_content .university {
+    float: left;
+    width: 100%;
+    height: 282px;
+}
+
+.box_content .university ul{
+    float: left;
+    padding: 0px;
+    margin: 0px;
+    height: 280px;
+    margin-left: 2%;
+    width: 95%;
+    list-style: none;
+    float: left;
+    border: 1px solid #CCCCCC;
+    overflow-y: auto;
+}
+
+.box_content .university li{
+    float: left;
+    text-align: left;
+    width: 160px;
+    margin: 0px;
+    padding: 0px;
+    margin-left: 10px;
+    margin-bottom: 5px;
+}
+
+.box_content .university a{
+    color: #446688;
+    text-decoration: none;
+}
+
+.box_content .university a:hover{
+    color: #ffffff;
+    background: #1c90d4;
+}
+
+.box_content .overtransparent{
+    background-color:#fff;
+    opacity: 0.30;
+    filter: alpha(opacity=30);
+}
+
+  .wrap_avatar{
+    position: relative;
+    margin-top:30px;
+    text-align: left;
+    height: 100%;/* 为了防止IE把高度撑开 */
+    clear: both;
+    padding-top: 20px;;
+  }
+
+  .avatar_form{
+    float:left;
+    margin-left:50px;
+    margin-top:25px;
+    position:relative
+  }
+
+.avatar_show{
+   display: block;
+   float: left;
+   left:10px;
+   top:45px;
+}
+
+.avatar_show img{
+    width:340px;
+    height:340px;
+}
+
+.uploader{
+    display: block;
+    position: relative;
+}
+
+.uploader label{
+    display:inline-block; 
+    width: 105px; 
+    text-align:center;    
+    border:1px solid #556699;
+    background-color: #0ca6f9;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#0ca6f9',endColorstr='#3399ff');
+    background: -webkit-gradient(linear,0 0,0 100%,from(#0ca6f9),to(#3399ff));
+    background: -moz-linear-gradient(top,#0ca6f9, #3399ff);
+    background:-o-linear-gradient(top, #0ca6f9, #3399ff);
+    color:#f8f8f8;
+    font-weight:normal;
+    position:normal;
+    z-index:-999;
+    cursor: hand;
+    line-height:24px;
+    height:24px;
+    padding: 3px 0px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    top:0px;
+}
+
+.uploader input{
+    opacity: 0;
+    -moz-opacity: 0;
+    filter:alpha(opacity=0);
+    position: absolute;
+    left:8px;
+    top:2px;
+    width:105px;
+    height:24px;
+    padding: 3px 0px;
+    font-size:18px;
+    z-index:99;
+    background: none repeat scroll 0 50% transparent;
+}
+
+.loading{
+    display: none;
+    width:300px;
+    position: absolute;
+    top:25px;
+    z-index:999;
+    height:40px;
+}
+
+.loading img{
+  position: absolute;
+  top:5px;
+  left:120px;
+}
+
+.loading span{
+    color: #2B2B2B;
+    font-size: 13px;
+    left: 150px;
+    line-height: 18px;
+    padding: 4px 0;
+    position: absolute;
+    top: 15px
+}
+
+#preview{
+    width:160px;height:160px
+}

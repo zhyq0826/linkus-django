@@ -1,0 +1,126 @@
+{% extends 'ask/i/base.html' %}
+
+
+{% block selfstyle %}
+
+<link rel="stylesheet" href="{{ STATIC_URL }}css/complete.css"/>
+    <style type='text/css'>
+
+     .error{
+        line-height:18px;
+        height:28px;
+        color: #d21a00;
+        padding:10px 0px;
+        padding-left:15px;
+        position:absolute;
+     }
+                         
+    </style>
+
+{% endblock %}
+
+
+{% block ihome %}
+
+<div class="current_location" >
+    <h3><a class="cl" href="/ask">问答</a></h3><span>>></span><span>提问</span> <a href="{{ user_url }}/ask" class="cr" >我的问答</a>
+</div>
+
+{% endblock %}
+
+{% block menu %}
+
+{% endblock %}
+
+{% block content %}
+
+         <form action='/ask/save' method='post' >
+			    <div class="ask" style="float:left" >
+                    <div class="askform" >
+                            <p style='position:relative' >
+                                <label for='question' >添加问题</label>
+                            {{ form.question }}
+                             <span class='error' >
+                                    {% for error in form.question.errors  %}  {{ error }} {% endfor %} 
+                            </span>
+                            </p>
+                           
+                            <p>
+                                 <label for='more' >问题补充</label>
+                                {{ form.more }}
+                            </p>
+                            <p style='padding:0px 0px 20px 0px' >
+                                {{ form.anonymity }}
+                                <label for='anonymity' style='display:inline' >匿名提问</label>
+                            </p>
+                            {{ form.id }}
+                            
+                            <input type="submit" style=";margin-right: 20px;" class="action"  value="保存" />
+                           <a class='cancel' href="/ask">取消</a>
+                    </div>
+                </div>
+                <div class="wrap_subject" style="float:left" >
+                  <div class="sj">
+                    <h3>选择主题：</h3>
+                    <ul>
+                      {% for s in subjects %}
+
+                        <li><a class="subject" id="{{ s.id }}" href="javascript:void(0)">{{ s.subject }}</a></li>
+
+                      {% endfor %}
+                      
+                    </ul>
+                  </div>
+                  <div class="tg" >
+                      <label for="tag" class="sl" >选择标签:</label>
+                      <ul class="holder" >
+                          {% for t in tag_list %}
+                              <li id="pt_1" class="bit_box">
+                                <span></span>
+                                <label>{{ t.tag }}</label>
+                                <input type="hidden" name="tag_list" value="{{ t.id }}">
+                              </li>
+                          {% endfor %}
+                      </ul>
+                      <input type="text" id="tag" name="tagtext" autocomplete="off" class="text"  >
+                  </div>
+                </div>
+                </form>
+{% endblock %}
+
+{% block selfscript %}
+
+<script type="text/javascript" src="{{ STATIC_URL }}js/complete.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/ask.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/jquery.elastic.js"></script>
+
+    <script type="text/javascript">
+
+      $("textarea").elastic()
+
+      function add_tag(id,tag){
+        var input = $('<input type="hidden" name="tag_list"/>').attr('value',id);
+        var label = $('<label></label>').prepend(tag);
+        var span = $('<span></span>');
+        var li = $('<li class="bit_box"  id="pt_'+id+'"></li>').prepend(span).append(label).append(input);
+
+        $(".holder").append(li)
+      }
+
+      function add_subject(id){
+        var input = $('<input type="hidden" name="subject_list"/>').attr('value',id);
+        $("form").append(input);
+        $("a[id='"+id+"']").addClass("shighelight");
+      }
+
+
+      {% if subject_list %}
+
+          {% for s in subject_list %}
+              add_subject({{ s.id }})
+          {% endfor %}
+
+      {% endif %}
+
+    </script>
+{% endblock %}
