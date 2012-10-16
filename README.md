@@ -1,8 +1,7 @@
 linkus-django
 =============
 
-linkus 技术列表
----------------
+## linkus 技术列表
 * python 2.7.2
 * django 1.3.3
 * mysql 5.1
@@ -14,13 +13,12 @@ linkus 技术列表
 * modi-wsgi-3.4
 
 
-一些杂感
---------------
+## 一些杂感
 
 ### 最初采用 django 和 mysql主要是出于两点
 
-1.django 开发速度快
-2.对mysql 有相关使用经验
+- django 开发速度快
+- 对mysql 有相关使用经验
 
 
 ### mysql的优势
